@@ -5,6 +5,7 @@
 
 ## Packages ##
 rm(list = ls())
+library("methods")
 suppressMessages(library("EpiModelHIV"))
 suppressMessages(library("ARTnet"))
 
@@ -12,32 +13,31 @@ ncores <- parallel::detectCores() - 1
 
 # 0. Initialize Network ---------------------------------------------------
 
-if (!file.exists("../data/input/netstats.rds")) {
-  epistats <- build_epistats(
-    geog.lvl = "city",
-    geog.cat = "Atlanta",
-    init.hiv.prev = c( 0.33, 0.137, 0.084),
-    race = TRUE
-  )
-  saveRDS(epistats, file = "../data/input/epistats.rds")
+epistats <- build_epistats(
+  geog.lvl = "city",
+  geog.cat = "Atlanta",
+  init.hiv.prev = c( 0.33, 0.137, 0.084),
+  race = TRUE
+)
+saveRDS(epistats, file = "data/input/epistats.rds")
 
-  netparams <- build_netparams(epistats = epistats, smooth.main.dur = TRUE)
-  netstats <- build_netstats(
-    epistats,
-    netparams,
-    expect.mort = 0.000478213,
-    network.size = 102000
-  )
-  saveRDS(netstats, file = "../data/input/netstats.rds")
+netparams <- build_netparams(epistats = epistats, smooth.main.dur = TRUE)
+netstats <- build_netstats(
+  epistats,
+  netparams,
+  expect.mort = 0.000478213,
+  network.size = 102000
+)
+saveRDS(netstats, file = "data/input/netstats.rds")
 
-  num <- netstats$demog$num
-  nw <- network::network_initialize(num, directed = FALSE)
+num <- netstats$demog$num
+nw <- network::network_initialize(num, directed = FALSE)
 
-  attr.names <- names(netstats$attr)
-  attr.values <- netstats$attr
-  nw <- network::set_vertex_attribute(nw, attr.names, attr.values)
-  nw_main <- nw_casl <- nw_inst <- nw
-}
+attr.names <- names(netstats$attr)
+attr.values <- netstats$attr
+nw <- network::set_vertex_attribute(nw, attr.names, attr.values)
+nw_main <- nw_casl <- nw_inst <- nw
+
 
 
 # 1. Main Model -----------------------------------------------------------
@@ -184,4 +184,4 @@ fit_inst <- netest(nw_inst,
 
 out <- list(fit_main, fit_casl, fit_inst)
 
-saveRDS(out, file = "../data/input/netest.rds")
+saveRDS(out, file = "data/input/netest.rds")
