@@ -28,23 +28,23 @@ model_main_dx <- ~edges +
   nodematch("role.class", diff = TRUE) +
   degree(0:3)
 
-dx_main <- netdx(fit_main, nsims = 2, ncores = 1, nsteps = 1000,
+dx_main <- netdx(fit_main, nsims = nsims, ncores = ncores, nsteps = 1000,
                  nwstats.formula = model_main_dx, skip.dissolution = TRUE,
-                 set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
+                 set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5),
+                 set.control.stergm = control.simulate.network(MCMC.burnin.min = 1.5e5,
+                                                              MCMC.burnin.max = 1.5e5))
 
-dx_main <- netdx(fit_main, nsims = 2, ncores = 1, nsteps = 100, skip.dissolution = TRUE)
+# print(dx_main, digits = 2)
 
-print(dx_main, digits = 2)
-
-netstats$main
-cbind(fit_main$coef.form)
+# netstats$main
+# cbind(fit_main$coef.form)
 
 dx_main_static <- netdx(fit_main, dynamic = FALSE, nsims = 10000,
                         nwstats.formula = model_main_dx, skip.dissolution = TRUE,
                         set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
-print(dx_main_static, digits = 1)
+# print(dx_main_static, digits = 1)
 
-plot(dx_main)
+# plot(dx_main)
 
 
 # Casual ------------------------------------------------------------------
@@ -61,13 +61,20 @@ model_casl_dx <- ~edges +
   concurrent +
   nodematch("role.class", diff = TRUE) +
   degree(0:4)
+
 dx_casl <- netdx(fit_casl, nsims = nsims, ncores = ncores, nsteps = 500,
                  nwstats.formula = model_casl_dx, skip.dissolution = TRUE,
-                 set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
-print(dx_casl, digits = 1)
-plot(dx_casl)
+                 set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5),
+                 set.control.stergm = control.simulate.network(MCMC.burnin.min = 1.5e5,
+                                                               MCMC.burnin.max = 1.5e5))
+# print(dx_casl, digits = 1)
+# plot(dx_casl)
 
-netstats$casl
+# netstats$casl
+
+dx_casl_static <- netdx(fit_casl, dynamic = FALSE, nsims = 10000,
+                        nwstats.formula = model_casl_dx, skip.dissolution = TRUE,
+                        set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
 
 
 # One-Off -----------------------------------------------------------------
@@ -87,7 +94,12 @@ dx_inst <- netdx(fit_inst, nsims = 10000, dynamic = FALSE,
                  nwstats.formula = model_inst_dx,
                  set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
 
-print(dx_inst, digits = 1)
-plot(dx_inst)
+# print(dx_inst, digits = 1)
+# plot(dx_inst)
 
-netstats$inst
+# netstats$inst
+
+dx <- list(dx_main, dx_main_static, dx_casl, dx_casl_static, dx_inst)
+
+saveRDS(dx, file = "data/input/netdx.rds")
+
