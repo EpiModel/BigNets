@@ -31,11 +31,11 @@ netstats <- build_netstats(
 saveRDS(netstats, file = "data/input/netstats.rds")
 
 num <- netstats$demog$num
-nw <- network::network_initialize(num, directed = FALSE)
+nw <- EpiModel::network_initialize(num, directed = FALSE)
 
 attr.names <- names(netstats$attr)
 attr.values <- netstats$attr
-nw <- network::set_vertex_attribute(nw, attr.names, attr.values)
+nw <- EpiModel::set_vertex_attribute(nw, attr.names, attr.values)
 nw_main <- nw_casl <- nw_inst <- nw
 
 
