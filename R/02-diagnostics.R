@@ -5,6 +5,7 @@
 
 ## Packages ##
 rm(list = ls())
+library("methods")
 suppressMessages(library("EpiModelHIV"))
 
 est <- readRDS("data/input/netest.rds")
