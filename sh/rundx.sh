@@ -2,5 +2,5 @@
 
 #SBATCH -o ./out/%x_%a.out
 
-source loadR.sh
+source sh/loadR.sh
 Rscript R/02-diagnostics.R

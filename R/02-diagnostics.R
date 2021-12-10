@@ -68,7 +68,7 @@ model_casl_dx <- ~edges +
   degree(0:4)
 
 dx_casl <- EpiModel::netdx(
-  fit_casl, nsims = nsims, ncores = ncores, nsteps = 500,
+  fit_casl, nsims = nsims, ncores = ncores, nsteps = 1000,
   nwstats.formula = model_casl_dx, skip.dissolution = TRUE,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5),
   set.control.stergm = control.simulate.network(MCMC.burnin.min = 1.5e5,
