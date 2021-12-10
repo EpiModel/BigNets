@@ -50,21 +50,26 @@
     "EpiModel": {
       "Package": "EpiModel",
       "Version": "2.2.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "0779dc93fdb18e411c39bdc0cc6465f2"
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "EpiModel",
+      "RemoteUsername": "EpiModel",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "6714130a6b81bcbf9ff4f816453d20993ecbf852",
+      "Hash": "7d2d6af970b7cc9e9f0ae4c03b40a44f"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
       "Version": "2.0.5",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "EpiModelHIV-p",
       "RemoteUsername": "EpiModel",
+      "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "HEAD",
-      "RemoteSha": "2238149f24f204d649779ecd90117a8dc9866f91",
-      "Hash": "17c153e5d7bb8be4644e529f68d9fcb7"
+      "RemoteSha": "704c9611717ab30b3cf9f04e01bdbb8e0bb6b871",
+      "RemoteHost": "api.github.com",
+      "Hash": "787f5676b920403e27554e7e7ddef079"
     },
     "MASS": {
       "Package": "MASS",
