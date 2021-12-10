@@ -9,7 +9,6 @@ library("methods")
 suppressMessages(library("EpiModelHIV"))
 
 est <- readRDS("data/input/netest.rds")
-netstats <- readRDS("data/input/netstats.rds")
 
 ncores <- parallel::detectCores() - 1
 nsims <- 50
@@ -37,19 +36,10 @@ dx_main <- netdx(
   set.control.stergm = control.simulate.network(MCMC.burnin.min = 1.5e5,
                                                  MCMC.burnin.max = 1.5e5))
 
-# print(dx_main, digits = 2)
-
-# netstats$main
-# cbind(fit_main$coef.form)
-
 dx_main_static <- EpiModel::netdx(
   fit_main, dynamic = FALSE, nsims = 10000,
   nwstats.formula = model_main_dx, skip.dissolution = TRUE,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
-
-# print(dx_main_static, digits = 1)
-
-# plot(dx_main)
 
 
 # Casual ------------------------------------------------------------------
@@ -73,10 +63,6 @@ dx_casl <- netdx(
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5),
   set.control.stergm = control.simulate.network(MCMC.burnin.min = 1.5e5,
                                                 MCMC.burnin.max = 1.5e5))
-# print(dx_casl, digits = 1)
-# plot(dx_casl)
-
-# netstats$casl
 
 dx_casl_static <- netdx(
   fit_casl, dynamic = FALSE, nsims = 10000,
@@ -103,12 +89,41 @@ dx_inst <- netdx(
   nwstats.formula = model_inst_dx,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
 
-# print(dx_inst, digits = 1)
-# plot(dx_inst)
-
-# netstats$inst
-
-dx <- list(dx_main, dx_main_static, dx_casl, dx_casl_static, dx_inst)
+dx <- list(dx_main = dx_main, dx_main_static = dx_main_static,
+           dx_casl = dx_casl, dx_casl_static = dx_casl_static,
+           dx_inst = dx_inst)
 
 saveRDS(dx, file = "data/input/netdx.rds")
 
+
+# Interactive Dx Analysis -------------------------------------------------
+
+if (interactive()) {
+
+netstats <- readRDS("data/input/netstats.rds")
+dx <- readRDS("data/input/netdx.rds")
+names(dx) <- c("dx_main", "dx_main_static", "dx_casl", "dx_casl_static", "dx_inst")
+
+# Main
+print(dx$dx_main, digits = 2)
+plot(dx$dx_main)
+
+netstats$main
+
+print(dx$dx_main_static, digits = 2)
+plot(dx$dx_main_static)
+
+# Casual
+print(dx$dx_casl, digits = 2)
+plot(dx$dx_casl)
+
+netstats$casl
+
+print(dx$dx_casl_static, digits = 2)
+plot(dx$dx_casl_static)
+
+# Inst
+print(dx$dx_inst, digits = 2)
+plot(dx$dx_inst)
+
+}
