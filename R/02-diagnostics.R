@@ -10,9 +10,9 @@ suppressMessages(library("EpiModelHIV"))
 
 est <- readRDS("data/input/netest.rds")
 
-ncores <- 5 #parallel::detectCores() - 1
+ncores <- 5
 nsims <- 25
-nsteps <- 500
+nsteps <- 1000
 
 # Main --------------------------------------------------------------------
 
@@ -33,7 +33,7 @@ dx_main <- netdx(
   fit_main, nsims = nsims, ncores = ncores, nsteps = nsteps,
   nwstats.formula = model_main_dx, skip.dissolution = TRUE,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5),
-  set.control.stergm = control.simulate.network(MCMC.burnin.min = 1e5))
+  set.control.stergm = control.simulate.network(MCMC.burnin.min = 2e5))
 
 dx_main_static <- EpiModel::netdx(
   fit_main, dynamic = FALSE, nsims = 10000,
@@ -60,7 +60,7 @@ dx_casl <- netdx(
   fit_casl, nsims = nsims, ncores = ncores, nsteps = nsteps,
   nwstats.formula = model_casl_dx, skip.dissolution = TRUE,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5),
-  set.control.stergm = control.simulate.network(MCMC.burnin.min = 1e5))
+  set.control.stergm = control.simulate.network(MCMC.burnin.min = 2e5))
 
 dx_casl_static <- netdx(
   fit_casl, dynamic = FALSE, nsims = 10000,
