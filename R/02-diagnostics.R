@@ -12,8 +12,9 @@ suppressMessages(library("EpiModel"))
 est <- readRDS("data/input/netest.rds")
 netstats <- readRDS("data/input/netstats.rds")
 
-ncores <- parallel::detectCores() - 1
+ncores <- parallel::detectCores() / 2
 nsims <- ncores * 4
+nsteps <- 500
 
 # Main --------------------------------------------------------------------
 
@@ -30,8 +31,8 @@ model_main_dx <- ~edges +
   nodematch("role.class", diff = TRUE) +
   degree(0:3)
 
-dx_main <- EpiModel::netdx(
-  fit_main, nsims = nsims, ncores = ncores, nsteps = 1000,
+dx_main <- netdx(
+  fit_main, nsims = nsims, ncores = ncores, nsteps = nsteps,
   nwstats.formula = model_main_dx, skip.dissolution = TRUE,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5),
   set.control.stergm = control.simulate.network(MCMC.burnin.min = 1.5e5,
@@ -67,8 +68,8 @@ model_casl_dx <- ~edges +
   nodematch("role.class", diff = TRUE) +
   degree(0:4)
 
-dx_casl <- EpiModel::netdx(
-  fit_casl, nsims = nsims, ncores = ncores, nsteps = 1000,
+dx_casl <- netdx(
+  fit_casl, nsims = nsims, ncores = ncores, nsteps = nsteps,
   nwstats.formula = model_casl_dx, skip.dissolution = TRUE,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5),
   set.control.stergm = control.simulate.network(MCMC.burnin.min = 1.5e5,
@@ -78,7 +79,7 @@ dx_casl <- EpiModel::netdx(
 
 # netstats$casl
 
-dx_casl_static <- EpiModel::netdx(
+dx_casl_static <- netdx(
   fit_casl, dynamic = FALSE, nsims = 10000,
   nwstats.formula = model_casl_dx, skip.dissolution = TRUE,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
@@ -98,7 +99,7 @@ model_inst_dx <- ~edges +
   nodematch("role.class", diff = TRUE) +
   degree(0:4)
 
-dx_inst <- EpiModel::netdx(
+dx_inst <- netdx(
   fit_inst, nsims = 10000, dynamic = FALSE,
   nwstats.formula = model_inst_dx,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
