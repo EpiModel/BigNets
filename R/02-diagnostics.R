@@ -13,7 +13,7 @@ netstats <- readRDS("data/input/netstats.rds")
 
 ncores <- parallel::detectCores() / 2
 nsims <- ncores * 4
-nsteps <- 500
+nsteps <- 1000
 
 # Main --------------------------------------------------------------------
 
