@@ -182,6 +182,5 @@ fit_inst <- netest(nw_inst,
 
 # 4. Save Data ------------------------------------------------------------
 
-out <- list(fit_main, fit_casl, fit_inst)
-
+out <- list(fit_main = fit_main, fit_casl = fit_casl, fit_inst = fit_inst)
 saveRDS(out, file = "data/input/netest.rds")
