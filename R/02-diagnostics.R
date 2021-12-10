@@ -100,7 +100,6 @@ if (interactive()) {
 
 netstats <- readRDS("data/input/netstats.rds")
 dx <- readRDS("data/input/netdx.rds")
-names(dx) <- c("dx_main", "dx_main_static", "dx_casl", "dx_casl_static", "dx_inst")
 
 # Main
 print(dx$dx_main, digits = 2)
