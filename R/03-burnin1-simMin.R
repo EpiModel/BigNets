@@ -10,7 +10,7 @@ suppressMessages(library("EpiModelHIV"))
 suppressMessages(library("EpiModelHPC"))
 
 ## Environmental Arguments
-pull_env_vars()
+pull_env_vars(num.vars = "NETSIZE")
 
 netsize.fn <- paste0(NETSIZE, "k.rds")
 
