@@ -26,9 +26,9 @@ netstats <- build_netstats(
   epistats,
   netparams,
   expect.mort = 0.000478213,
-  network.size = 102000
+  network.size = 102000/2
 )
-saveRDS(netstats, file = "data/input/netstats.rds")
+saveRDS(netstats, file = "data/input/netstats-50k.rds")
 
 num <- netstats$demog$num
 nw <- EpiModel::network_initialize(num, directed = FALSE)
@@ -183,4 +183,14 @@ fit_inst <- netest(nw_inst,
 # 4. Save Data ------------------------------------------------------------
 
 out <- list(fit_main = fit_main, fit_casl = fit_casl, fit_inst = fit_inst)
-saveRDS(out, file = "data/input/netest.rds")
+saveRDS(out, file = "data/input/netest-50k.rds")
+
+# sim <- simulate(
+#   est[[1]][["fit"]],
+#   basis = est[[1]][["fit"]][["newnetwork"]],
+#   dynamic = FALSE
+# )
+#
+# est$fit_main$fit$newnetworks <- NULL
+# est$fit_casl$fit$newnetworks <- NULL
+# est$fit_inst$fit$newnetworks <- NULL

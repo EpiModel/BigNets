@@ -13,9 +13,9 @@ suppressMessages(library("EpiModelHPC"))
 pull_env_vars()
 
 ## Parameters
-netstats <- readRDS("data/input/netstats.rds")
+netstats <- readRDS("data/input/netstats-100k.rds")
 epistats <- readRDS("data/input/epistats.rds")
-est <- readRDS("data/input/netest.rds")
+est <- readRDS("data/input/netest-100k.rds")
 
 param <- param_msm(netstats = netstats,
                    epistats = epistats,
@@ -30,8 +30,8 @@ param <- param_msm(netstats = netstats,
 init <- init_msm()
 control <- control_msm(simno = fsimno,
                        nsteps = 52 * 60,
-                       nsims = 10,
-                       ncores = 10)
+                       nsims = 1,
+                       ncores = 1)
 ## Simulation
 sim <- netsim(est, param, init, control)
 
