@@ -52,12 +52,12 @@
       "Version": "2.2.0",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "EpiModel",
       "RemoteUsername": "EpiModel",
+      "RemoteRepo": "EpiModel",
       "RemoteRef": "HEAD",
-      "RemoteSha": "6714130a6b81bcbf9ff4f816453d20993ecbf852",
-      "Hash": "7d2d6af970b7cc9e9f0ae4c03b40a44f"
+      "RemoteSha": "197b1049cda77b364cca94ac657bd15449f54bb8",
+      "RemoteHost": "api.github.com",
+      "Hash": "779160c25a78d78f2e345094242f6b13"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
@@ -70,6 +70,18 @@
       "RemoteSha": "704c9611717ab30b3cf9f04e01bdbb8e0bb6b871",
       "RemoteHost": "api.github.com",
       "Hash": "787f5676b920403e27554e7e7ddef079"
+    },
+    "EpiModelHPC": {
+      "Package": "EpiModelHPC",
+      "Version": "2.1.1",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "EpiModelHPC",
+      "RemoteUsername": "EpiModel",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "87980b8cf37c67820d6323ac3ec165666d19688c",
+      "Hash": "ab3632a65585189453915ce2b155eced"
     },
     "MASS": {
       "Package": "MASS",
@@ -441,6 +453,20 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "caf9dc2f33cc6ea4b1930cd71ee29d10"
+    },
+    "stringi": {
+      "Package": "stringi",
+      "Version": "1.7.6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "bba431031d30789535745a9627ac9271"
+    },
+    "stringr": {
+      "Package": "stringr",
+      "Version": "1.4.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0759e6b6c0957edb1311028a49a35e76"
     },
     "survey": {
       "Package": "survey",
