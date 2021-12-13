@@ -7,6 +7,7 @@
 ## Packages
 library("methods")
 suppressMessages(library("EpiModelHIV"))
+suppressMessages(library("EpiModelHPC"))
 
 ## Environmental Arguments
 pull_env_vars()
@@ -28,9 +29,9 @@ param <- param_msm(netstats = netstats,
                    prep.start.prob = 0.66)
 init <- init_msm()
 control <- control_msm(simno = fsimno,
-                       nsteps = 52 * 60,
-                       nsims = ncores,
-                       ncores = ncores)
+                       nsteps = 52 * 100,
+                       nsims = 10,
+                       ncores = 10)
 ## Simulation
 sim <- netsim(est, param, init, control)
 
@@ -38,4 +39,4 @@ sim <- netsim(est, param, init, control)
 savesim(sim, save.min = TRUE, save.max = FALSE, compress = TRUE)
 
 # Merging
-process_simfiles(simno = simno, min.n = njobs, nsims = nsims)
+# process_simfiles(simno = simno, min.n = njobs, nsims = nsims)
