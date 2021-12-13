@@ -79,9 +79,9 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHPC",
       "RemoteRef": "HEAD",
-      "RemoteSha": "3091b80144fc683a3cb7ee86b84efbe4ced051ca",
+      "RemoteSha": "5af94d629f26aa2aa9481a2aaca47f5d46c7ecba",
       "RemoteHost": "api.github.com",
-      "Hash": "ba10b83873acc9afc1c33b5afc15a9c5"
+      "Hash": "9c9dc9b87d472dec151f4d3f7970eb56"
     },
     "MASS": {
       "Package": "MASS",
