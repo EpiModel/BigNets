@@ -76,12 +76,12 @@
       "Version": "2.1.2",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "EpiModelHPC",
       "RemoteUsername": "EpiModel",
+      "RemoteRepo": "EpiModelHPC",
       "RemoteRef": "HEAD",
-      "RemoteSha": "fd9a009fcc14ced333cdcc3f15b21ee345042ae6",
-      "Hash": "29dd29d4ef0dc6573129f883531c0d8b"
+      "RemoteSha": "3091b80144fc683a3cb7ee86b84efbe4ced051ca",
+      "RemoteHost": "api.github.com",
+      "Hash": "ba10b83873acc9afc1c33b5afc15a9c5"
     },
     "MASS": {
       "Package": "MASS",
