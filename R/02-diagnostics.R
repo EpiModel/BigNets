@@ -8,10 +8,10 @@ rm(list = ls())
 library("methods")
 suppressMessages(library("EpiModelHIV"))
 
-est <- readRDS("data/input/netest.rds")
+est <- readRDS("data/input/netest-100k.rds")
 
-ncores <- 5
-nsims <- 25
+ncores <- 30
+nsims <- 30
 nsteps <- 1000
 
 # Main --------------------------------------------------------------------

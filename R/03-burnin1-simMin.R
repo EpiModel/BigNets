@@ -13,9 +13,9 @@ suppressMessages(library("EpiModelHPC"))
 pull_env_vars()
 
 ## Parameters
-netstats <- readRDS("data/input/netstats-10k.rds")
+netstats <- readRDS("data/input/netstats-100k.rds")
 epistats <- readRDS("data/input/epistats.rds")
-est <- readRDS("data/input/netest-10k.rds")
+est <- readRDS("data/input/netest-100k.rds")
 
 param <- param_msm(netstats = netstats,
                    epistats = epistats,
@@ -39,4 +39,4 @@ sim <- netsim(est, param, init, control)
 savesim(sim, save.min = TRUE, save.max = FALSE, compress = TRUE)
 
 # Merging
-process_simfiles(simno = simno, min.n = njobs, nsims = nsims)
+# process_simfiles(simno = simno, min.n = njobs, nsims = nsims)
