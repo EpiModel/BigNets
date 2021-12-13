@@ -12,10 +12,12 @@ suppressMessages(library("EpiModelHPC"))
 ## Environmental Arguments
 pull_env_vars()
 
+netsize.fn <- paste0(NETSIZE, "k.rds")
+
 ## Parameters
-netstats <- readRDS("data/input/netstats-100k.rds")
 epistats <- readRDS("data/input/epistats.rds")
-est <- readRDS("data/input/netest-100k.rds")
+netstats <- readRDS(paste0("data/input/netstats-", netsize.fn))
+est <- readRDS(paste0("data/input/netest-", netsize.fn))
 
 param <- param_msm(netstats = netstats,
                    epistats = epistats,
@@ -31,7 +33,10 @@ init <- init_msm()
 control <- control_msm(simno = fsimno,
                        nsteps = 52 * 60,
                        nsims = ncores,
-                       ncores = ncores)
+                       ncores = ncores,
+                       verbose = TRUE,
+                       verbose.int = 10,
+                       verbose.FUN = verbose.hpc.net)
 ## Simulation
 sim <- netsim(est, param, init, control)
 
