@@ -29,7 +29,7 @@ param <- param_msm(netstats = netstats,
                    prep.start.prob = 0.66)
 init <- init_msm()
 control <- control_msm(simno = fsimno,
-                       nsteps = 52 * 100,
+                       nsteps = 52 * 60,
                        nsims = 10,
                        ncores = 10)
 ## Simulation

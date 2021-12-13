@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --mail-user=$USER@emory.edu
+#SBATCH --mail-user=sjennes@emory.edu
 #SBATCH -o ./out/%x_%a.out
 
 source sh/loadR.sh
