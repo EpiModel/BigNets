@@ -34,14 +34,13 @@ control <- control_msm(simno = fsimno,
                        nsteps = 52 * 60,
                        nsims = ncores,
                        ncores = ncores,
+                       cumulative.edgelist = TRUE,
+                       truncate.el.cuml = 0,
                        verbose = TRUE,
-                       verbose.int = 100,
+                       verbose.int = 250,
                        verbose.FUN = verbose.hpc.net)
 ## Simulation
 sim <- netsim(est, param, init, control)
 
 ## Save-Min
 savesim(sim, save.min = TRUE, save.max = FALSE, compress = TRUE, data.dir = "data/output/")
-
-# Merging
-# process_simfiles(simno = simno, min.n = njobs, nsims = nsims)
