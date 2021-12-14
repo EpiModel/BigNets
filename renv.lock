@@ -67,9 +67,9 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "HEAD",
-      "RemoteSha": "c3344086c46b3002c009d19c108e5f3243c7c319",
+      "RemoteSha": "20e4ed6047c06afd6e24de173433d5e4649d0187",
       "RemoteHost": "api.github.com",
-      "Hash": "a6212f3519be05348fdb43a07e0852a3"
+      "Hash": "0626e3451f73ef58373c702f4134d458"
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",
