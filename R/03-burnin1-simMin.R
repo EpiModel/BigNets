@@ -41,7 +41,7 @@ control <- control_msm(simno = fsimno,
 sim <- netsim(est, param, init, control)
 
 ## Save-Min
-savesim(sim, save.min = TRUE, save.max = FALSE, compress = TRUE)
+savesim(sim, save.min = TRUE, save.max = FALSE, compress = TRUE, data.dir = "data/output/")
 
 # Merging
 # process_simfiles(simno = simno, min.n = njobs, nsims = nsims)
