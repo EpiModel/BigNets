@@ -8,6 +8,6 @@ sbatch -N 1 -n 1 --cpus-per-task=32 -p preemptable --time=24:00:00 --mem=180G --
 
 sbatch -p preemptable --array=1-20 --nodes=1 --cpus-per-task=32 --time=24:00:00 --mem=185G --job-name=s1 --mail-type=ALL --export=ALL,SIMNO=0001 sh/runR.sh "03-burnin1-simMin"
 
-sbatch -p preemptable --array=1-10 --nodes=1 --ntasks-per-node=30 --time=24:00:00 --mem=180G --job-name=s3000 \
-       --mail-type=END,FAIL --mail-user=sjennes@emory.edu --export=ALL,SIMNO=3000,NETSIZE=100 \
+sbatch -p preemptable --array=1 --nodes=1 --cpus-per-task=30 --time=24:00:00 --mem=180G --job-name=s3100 \
+       --mail-type=ALL --mail-user=sjennes@emory.edu --export=ALL,SIMNO=3100,NETSIZE=100 \
        sh/runR.sh "03-burnin1-simMin"
