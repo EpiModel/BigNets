@@ -55,9 +55,9 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "HEAD",
-      "RemoteSha": "197b1049cda77b364cca94ac657bd15449f54bb8",
+      "RemoteSha": "d4002714ea148e01f162d77770f700b7690ebe3d",
       "RemoteHost": "api.github.com",
-      "Hash": "779160c25a78d78f2e345094242f6b13"
+      "Hash": "34803d6c4db46d2d3f62220a7b0f6dd6"
     },
     "EpiModelHIV": {
       "Package": "EpiModelHIV",
@@ -67,9 +67,9 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "HEAD",
-      "RemoteSha": "700588f60ccebd694b7474a88bff8560a6ba90d9",
+      "RemoteSha": "b1649f50bc2e004e743004b571fdb7260bb2eaf7",
       "RemoteHost": "api.github.com",
-      "Hash": "9e44fe5a269fa19aaa4a69f9992e90e4"
+      "Hash": "f3e85725277ef73916ff819e64b06314"
     },
     "EpiModelHPC": {
       "Package": "EpiModelHPC",
@@ -79,9 +79,9 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHPC",
       "RemoteRef": "HEAD",
-      "RemoteSha": "f74e4b76e37b8fb2f7345c6a9b5d8c6f159e0902",
+      "RemoteSha": "57f6d6d100a17c081f67942bc5256b9df60853a1",
       "RemoteHost": "api.github.com",
-      "Hash": "fd010d8f8b034441693cc3ddc5435f0d"
+      "Hash": "83670dd2791269ffe3d5507dd5543e46"
     },
     "MASS": {
       "Package": "MASS",
