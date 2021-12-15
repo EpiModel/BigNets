@@ -21,6 +21,7 @@ est <- readRDS(paste0("data/input/netest-", netsize.fn))
 
 param <- param_msm(netstats = netstats,
                    epistats = epistats,
+                   a.rate = 0.00049,
                    hiv.test.rate = c(0.00385, 0.00380, 0.00690),
                    tx.init.prob = c(0.1775, 0.190, 0.2521),
                    tx.halt.partial.prob = c(0.0062, 0.0055, 0.0031),
