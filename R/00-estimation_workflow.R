@@ -2,6 +2,10 @@
 ## 00. Network Model Estimation, HPC setup
 ##
 
+# how to get hpc limits:
+#   sinfo <partition> -O Partition,Memory
+#   scontrol show config
+
 # Setup ------------------------------------------------------------------------
 library(slurmworkflow)
 
@@ -40,7 +44,7 @@ wf <- add_workflow_step(
   sbatch_opts = list(
     "cpus-per-task" = max_cores,
     "time" = "24:00:00",
-    "mem" = "180G"
+    "mem" = "0" # special: all mem on node
   )
 )
 
@@ -58,6 +62,6 @@ wf <- add_workflow_step(
   sbatch_opts = list(
     "cpus-per-task" = max_cores,
     "time" = "04:00:00",
-    "mem" = "180G"
+    "mem-per-cpu" = "4G"
   )
 )

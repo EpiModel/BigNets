@@ -658,12 +658,12 @@
       "Version": "0.0.0.9000",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "adrienleguillou",
       "RemoteRepo": "slurmworkflow",
       "RemoteRef": "main",
-      "RemoteSha": "8bccc9de6a0a38508ebaab4ab071eb7c08f5c7d8",
-      "Hash": "081eb332bb9e5ebeb3d66c54db56e4b3",
+      "RemoteSha": "adc17bf969441a34c578d1fa400038e5423b10c4",
+      "RemoteHost": "api.github.com",
+      "Hash": "a722f406362c2c99217094bc3239bec3",
       "Requirements": [
         "fs",
         "yaml"
