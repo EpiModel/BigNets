@@ -1,20 +1,23 @@
-
 ##
 ## 02. Network Model Diagnostics
 ##
 
-## Packages ##
+# Setup ------------------------------------------------------------------------
 rm(list = ls())
-library("methods")
-suppressMessages(library("EpiModelHIV"))
+suppressMessages({
+  library(EpiModelHIV)
+})
 
-est <- readRDS("data/input/netest-100k.rds")
+if (!exists("ncores"))
+  ncores <- parallel::detectCores() - 1
+if (!exists("nsims"))
+  nsims <- ncores
+if (!exists("nsteps"))
+  nsteps <- 1000
 
-ncores <- 30
-nsims <- 30
-nsteps <- 1000
+est <- readRDS("data/input/netest.rds")
 
-# Main --------------------------------------------------------------------
+# Main -------------------------------------------------------------------------
 
 fit_main <- est[[1]]
 
@@ -41,7 +44,7 @@ dx_main_static <- EpiModel::netdx(
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
 
 
-# Casual ------------------------------------------------------------------
+# Casual -----------------------------------------------------------------------
 
 fit_casl <- est[[2]]
 
@@ -68,7 +71,7 @@ dx_casl_static <- netdx(
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
 
 
-# One-Off -----------------------------------------------------------------
+# One-Off ----------------------------------------------------------------------
 
 fit_inst <- est[[3]]
 
@@ -92,35 +95,3 @@ dx <- list(dx_main = dx_main, dx_main_static = dx_main_static,
            dx_inst = dx_inst)
 
 saveRDS(dx, file = "data/input/netdx.rds")
-
-
-# Interactive Dx Analysis -------------------------------------------------
-
-if (interactive()) {
-
-netstats <- readRDS("data/input/netstats.rds")
-dx <- readRDS("data/input/netdx.rds")
-
-# Main
-print(dx$dx_main, digits = 2)
-plot(dx$dx_main)
-
-netstats$main
-
-print(dx$dx_main_static, digits = 2)
-plot(dx$dx_main_static)
-
-# Casual
-print(dx$dx_casl, digits = 2)
-plot(dx$dx_casl)
-
-netstats$casl
-
-print(dx$dx_casl_static, digits = 2)
-plot(dx$dx_casl_static)
-
-# Inst
-print(dx$dx_inst, digits = 2)
-plot(dx$dx_inst)
-
-}
