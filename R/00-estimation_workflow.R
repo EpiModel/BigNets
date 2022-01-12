@@ -7,8 +7,7 @@
 #   scontrol show config
 
 # Setup ------------------------------------------------------------------------
-# library(slurmworkflow)
-pkgload::load_all("../slurmworkflow")
+library(slurmworkflow)
 
 if (fs::dir_exists("workflows/estimation"))
   fs::dir_delete("workflows/estimation")
