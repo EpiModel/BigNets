@@ -7,7 +7,11 @@
 #   scontrol show config
 
 # Setup ------------------------------------------------------------------------
-library(slurmworkflow)
+# library(slurmworkflow)
+pkgload::load_all("../slurmworkflow")
+
+if (fs::dir_exists("workflows/estimation"))
+  fs::dir_delete("workflows/estimation")
 
 setup_script <- "sh/loadR_klone.sh"
 max_cores <- 40
