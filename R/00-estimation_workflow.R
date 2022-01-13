@@ -57,7 +57,8 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_do_call_script(
     r_script = "R/02-diagnostics.R",
     args = list(
-      ncores = max_cores,
+      ncores = 15,
+      nsims = 30,
       nsteps = 1e3
     ),
     setup_script = setup_script
