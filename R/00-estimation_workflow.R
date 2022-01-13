@@ -55,7 +55,7 @@ wf <- add_workflow_step(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
-    r_script = "R/01-estimation.R",
+    r_script = "R/02-diagnostics.R",
     args = list(
       ncores = max_cores,
       nsteps = 1e3

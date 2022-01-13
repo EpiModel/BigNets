@@ -3,7 +3,6 @@
 ##
 
 # Setup ------------------------------------------------------------------------
-rm(list = ls())
 suppressMessages({
   library(EpiModelHIV)
 })
