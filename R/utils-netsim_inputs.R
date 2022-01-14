@@ -28,7 +28,7 @@ param <- param_msm(
   tx.halt.partial.prob = c(0.0062, 0.0055, 0.0031),
   tx.reinit.partial.prob = c(0.00255, 0.00255, 0.00255),
   trans.scale = c(2.44, 0.424, 0.270),
-  riskh.start = prep_start - 53 ,
+  riskh.start = prep_start - 53,
   prep.start = prep_start,
   prep.start.prob = 0.66
 )

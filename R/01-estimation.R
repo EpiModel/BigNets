@@ -2,16 +2,15 @@
 ## 01. Network Model Estimation
 ##
 
+# Required variables:
+#   - `ncores`
+
 # Setup ------------------------------------------------------------------------
 suppressMessages({
   library(methods)
   library(EpiModelHIV)
   library(ARTnet)
 })
-
-if (!exists("ncores")) {
-  ncores <- parallel::detectCores() - 1
-}
 
 if (!dir.exists("data/input/")) {
   dir.create("data/input/", recursive = TRUE)

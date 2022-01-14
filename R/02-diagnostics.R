@@ -2,17 +2,15 @@
 ## 02. Network Model Diagnostics
 ##
 
+# Required variables:
+#   - `ncores`
+#   - `nsims`
+#   - `nsteps`
+
 # Setup ------------------------------------------------------------------------
 suppressMessages({
   library(EpiModelHIV)
 })
-
-if (!exists("ncores"))
-  ncores <- parallel::detectCores() - 1
-if (!exists("nsims"))
-  nsims <- ncores
-if (!exists("nsteps"))
-  nsteps <- 1000
 
 est <- readRDS("data/input/netest.rds")
 
@@ -42,7 +40,6 @@ dx_main_static <- EpiModel::netdx(
   nwstats.formula = model_main_dx, skip.dissolution = TRUE,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
 
-
 # Casual -----------------------------------------------------------------------
 
 fit_casl <- est[[2]]
@@ -68,7 +65,6 @@ dx_casl_static <- netdx(
   fit_casl, dynamic = FALSE, nsims = 10000,
   nwstats.formula = model_casl_dx, skip.dissolution = TRUE,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
-
 
 # One-Off ----------------------------------------------------------------------
 

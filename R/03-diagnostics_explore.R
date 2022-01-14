@@ -2,8 +2,9 @@
 ## 02. Network Model Diagnostics: Interactive Analysis
 ##
 
+# scp -r klone.hyak.uw.edu:gscratch/BigNets/data/input data/
+
 # Setup ------------------------------------------------------------------------
-rm(list = ls())
 suppressMessages({
   library(EpiModelHIV)
 })
@@ -34,4 +35,3 @@ plot(dx$dx_casl_static)
 # Inst
 print(dx$dx_inst, digits = 2)
 plot(dx$dx_inst)
-
