@@ -24,7 +24,7 @@ nsteps = 100
 source("R/utils-targets.R")
 
 control <- control_msm(
-  nsteps = nsteps,
+  nsteps = calibration_length,
   nsims = ncores,
   ncores = ncores,
   cumulative.edgelist = TRUE,

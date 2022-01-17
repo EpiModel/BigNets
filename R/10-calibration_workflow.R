@@ -43,7 +43,7 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_map_script(
     r_script = "R/11-calibration_sim.R",
     scenario = scenarios.list,
-    scenario_names = names(scenarios.list),
+    scenario_name = names(scenarios.list),
     batch_num = seq_along(scenarios.list),
     MoreArgs = list(
       ncores = max_cores

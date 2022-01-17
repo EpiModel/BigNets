@@ -13,10 +13,10 @@ netstats <- readRDS("data/input/netstats.rds")
 est <- readRDS("data/input/netest.rds")
 
 # Relevant times
-calibration_length <- 52 * 60
-prep_start         <- 52 * 65 + 1
-interv_start       <- 52 * 70 + 1
-nsteps             <- 52 * 80
+calibration_length <- 52 * 20
+prep_start         <- calibration_length + 52 * 5 + 1
+interv_start       <- prep_start + 52 * 5
+nsteps             <- interv_start + 52 * 10 - 1
 
 # Parameters -------------------------------------------------------------------
 param <- param_msm(
