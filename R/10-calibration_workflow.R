@@ -9,7 +9,7 @@ if (fs::dir_exists("workflows/calibration"))
   fs::dir_delete("workflows/calibration")
 
 setup_script <- "sh/loadR_klone.sh"
-max_cores <- 40
+max_cores <- 20
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
