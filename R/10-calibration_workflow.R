@@ -35,7 +35,7 @@ wf <- add_workflow_step(
 # Run the simulations ----------------------------------------------------------
 n_replications <- 10
 scenarios.df <- read.csv("data/input/calib_scenarios.csv")
-scenarios.list <- make_scenarios_list(scenarios.df)
+scenarios.list <- EpiModel:::make_scenarios_list(scenarios.df)
 scenarios.list <- rep(scenarios.list, n_replications)
 
 wf <- add_workflow_step(
@@ -44,6 +44,7 @@ wf <- add_workflow_step(
     r_script = "R/11-calibration_sim.R",
     scenario = scenarios.list,
     scenario_names = names(scenarios.list),
+    batch_num = seq_along(scenarios.list),
     MoreArgs = list(
       ncores = max_cores
     ),

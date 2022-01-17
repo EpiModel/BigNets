@@ -9,14 +9,18 @@
 # Setup ------------------------------------------------------------------------
 suppressMessages({
   library(EpiModelHIV)
-  library(futur.apply)
+  library(future.apply)
 })
 
 future::plan(future::multicore, workers = ncores)
 calib_dir <- "data/output/calib"
 
 # Process each file in parallel ------------------------------------------------
-calib_files <- list.files(calib_dir, pattern = "^simcalib_.*rds$")
+calib_files <- list.files(
+  calib_dir,
+  pattern = "^simcalib_.*rds$",
+  full.names = TRUE
+)
 
 source("R/utils-targets.R")
 assessments <- future.apply::future_lapply(

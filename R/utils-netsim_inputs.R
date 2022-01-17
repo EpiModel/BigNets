@@ -9,8 +9,8 @@ suppressMessages({
 })
 
 epistats <- readRDS("data/input/epistats.rds")
-netstats <- readRDS("data/input/netstats-")
-est <- readRDS("data/input/netest-")
+netstats <- readRDS("data/input/netstats.rds")
+est <- readRDS("data/input/netest.rds")
 
 # Relevant times
 calibration_length <- 52 * 60

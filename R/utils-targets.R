@@ -35,9 +35,9 @@ mutate_targets <- function(d) {
     cc.vsupp.H    = i_sup___H / i_dx___H,
     cc.vsupp.W    = i_sup___W / i_dx___W,
     gc_s          = gc_s___B + gc_s___H + gc_s___W,
-    ir100.gc = incid.gc / gc_s * 5200,
+    ir100.gc      = incid.gc / gc_s * 5200,
     ct_s          = ct_s___B + ct_s___H + ct_s___W,
-    ir100.ct = incid.ct / ct_s * 5200,
+    ir100.ct      = incid.ct / ct_s * 5200,
     i.prev.dx.B   = i_dx___B / n___B,
     i.prev.dx.H   = i_dx___H / n___H,
     i.prev.dx.W   = i_dx___W / n___W,
@@ -48,36 +48,43 @@ mutate_targets <- function(d) {
 }
 
 process_one_calibration <- function(file_name, nsteps = 52) {
-  name_elts <- strsplit(file_name, "__")
+  # keep only the file name without extension and split around `__`
+  name_elts <- fs::path_file(file_name) %>%
+    fs::path_ext_remove() %>%
+    strsplit(split = "__")
+
   scenario_name <- name_elts[[1]][2]
-  array_number <- name_elts[[1]][3]
+  batch_num <- as.numeric(name_elts[[1]][3])
 
   d <- as_tibble(readRDS(file_name))
   d <- d %>%
     filter(time >= max(time) - nsteps) %>%
     mutate_targets() %>%
-    select(c(sim, dplyr::all_off(names(targets)))) %>%
+    select(c(sim, all_of(names(targets)))) %>%
     group_by(sim) %>%
     summarise(across(
       everything(),
-      median = ~ mean(.x, na.rm = TRUE)
+      ~ mean(.x, na.rm = TRUE)
     )) %>%
     mutate(
       scenario_name = scenario_name,
-      array_number = array_number
+      batch = batch_num
     )
 
   return(d)
 }
 
+source("R/utils-epi_trackers.R")
 calibration_trackers_ls <- list(
-  n        = epi_n,
-  i        = epi_i,
-  i_dx     = epi_i_dx,
-  i_sup    = epi_i_sup,
-  linked1m = epi_linked_time(4),
-  gc_s     = epi_gc_s(c(0, 1)),
-  ct_s     = epi_ct_s(c(0, 1))
+  n           = epi_n,
+  i           = epi_i,
+  i_dx        = epi_i_dx,
+  i_sup       = epi_i_sup,
+  linked1m    = epi_linked_time(4), # 1 month ~= 4 weeks
+  gc_s        = epi_gc_s(c(0, 1)),  # we want the gc susceptible HIV+ and -
+  ct_s        = epi_ct_s(c(0, 1)),
+  s_prep      = epi_s_prep,
+  s_prep_elig = epi_s_prep_elig
 )
 
 calibration_trackers <- epi_tracker_by_race(
