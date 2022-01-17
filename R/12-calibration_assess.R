@@ -33,7 +33,7 @@ assessments <- future.apply::future_lapply(
 assessments <- bind_rows(assessments)
 
 assessments <- assessments %>%
-  select(- c(sim, array_number)) %>%
+  select(- c(sim, batch_num)) %>%
   group_by(scenario_name) %>%
   summarise(across(
     everything(),
