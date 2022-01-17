@@ -12,8 +12,9 @@ library(slurmworkflow)
 if (fs::dir_exists("workflows/estimation"))
   fs::dir_delete("workflows/estimation")
 
+# setup_script contains the bash script used to load the R module on the HPC
 setup_script <- "sh/loadR_klone.sh"
-max_cores <- 40
+max_cores <- 32
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
@@ -26,6 +27,10 @@ wf <- create_workflow(
 )
 
 # Update RENV on the HPC -------------------------------------------------------
+#
+# this template will run:
+#   git pull
+#   renv::restore()
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_renv_restore(setup_script = setup_script),
@@ -37,6 +42,10 @@ wf <- add_workflow_step(
 )
 
 # Estimate the networks --------------------------------------------------------
+#
+# this template uses the syntax of `base::do.call`
+# the arguments in `args` will be made available as variables to the script on
+# the HPC
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
@@ -51,7 +60,7 @@ wf <- add_workflow_step(
   )
 )
 
-# Generate the diagnostics -----------------------------------------------------
+# Generate the diagnostics data ------------------------------------------------
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
@@ -66,8 +75,14 @@ wf <- add_workflow_step(
   sbatch_opts = list(
     "cpus-per-task" = max_cores,
     "time" = "04:00:00",
-    "mem-per-cpu" = "4G"
+    "mem-per-cpu" = "4G",
+    "mail-type" = "END" # to get a mail upon completion
   )
 )
 
+# to send the workflows on the HPC
+# scp -r workflows klone.hyak.uw.edu:gscratch/BigNets/
+# from the BigNets folder on Klone: workflows/estimation/start_workflow.sh
+
+# to get the data back
 # scp -r klone.hyak.uw.edu:gscratch/BigNets/data/input data/

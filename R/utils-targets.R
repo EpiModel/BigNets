@@ -23,6 +23,7 @@ targets <- c(
   prep_prop = 0.15
 )
 
+# function to calculate the target
 mutate_targets <- function(d) {
   d %>% mutate(
     cc.dx.B       = i_dx___B / i___B,
@@ -74,6 +75,7 @@ process_one_calibration <- function(file_name, nsteps = 52) {
   return(d)
 }
 
+# required trackers for the calibration step
 source("R/utils-epi_trackers.R")
 calibration_trackers_ls <- list(
   n           = epi_n,

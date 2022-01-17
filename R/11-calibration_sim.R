@@ -20,7 +20,6 @@ if (!dir.exists(output_dir)) {
 }
 
 source("R/utils-netsim_inputs.R")
-nsteps = 100
 source("R/utils-targets.R")
 
 control <- control_msm(
@@ -30,9 +29,10 @@ control <- control_msm(
   cumulative.edgelist = TRUE,
   truncate.el.cuml = 0,
   verbose = FALSE,
-  tracker.list = calibration_trackers
+  tracker.list = calibration_trackers # created in R/utils-targets.R
 )
 
+# apply the scenario to the parameters
 param <- update_params(param, scenario)
 
 # Simulation -------------------------------------------------------------------
@@ -40,7 +40,9 @@ print(paste0("Starting simulation for scenario: ", scenario_name))
 print(paste0("Batch number: ", batch_num))
 sim <- netsim(est, param, init, control)
 
-## Save-Min
+## Save the simulation
+#  I am not very familiar with the `savesim` workflow so I am doing it this
+#  way for now
 file_name <- paste0("simcalib__", scenario_name, "__", batch_num, ".rds")
 saveRDS(sim, paste0(output_dir, "/", file_name))
 

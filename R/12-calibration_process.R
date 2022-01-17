@@ -1,5 +1,5 @@
 ##
-## 12. Epidemic Model Parameter Calibration, Assessment
+## 12. Epidemic Model Parameter Calibration, Processing
 ##
 
 # Required variables:
@@ -11,6 +11,7 @@ suppressMessages({
   library(EpiModelHIV)
   library(future.apply)
 })
+
 
 future::plan(future::multicore, workers = ncores)
 calib_dir <- "data/output/calib"
@@ -25,7 +26,7 @@ calib_files <- list.files(
 source("R/utils-targets.R")
 assessments <- future.apply::future_lapply(
   calib_files,
-  process_one_calibration,
+  process_one_calibration, # in R/utils-targets.R
   nsteps = nsteps
 )
 
@@ -44,6 +45,8 @@ assessments <- assessments %>%
     ),
     .names = "{.col}__{.fn}"
   ))
+  # this last bloc calculate the q1, median and q3 for all of the variables
 
 # Save the result --------------------------------------------------------------
+# small rds to be downloaded and assessed localy
 saveRDS(assessments, paste0(calib_dir, "/assessments.rds"))

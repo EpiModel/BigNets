@@ -1,4 +1,7 @@
-# Utility ----------------------------------------------------------------------
+# Utilities --------------------------------------------------------------------
+# makes the trackers race specific
+# indiv == TRUE: 3 trackers: tracker___B, tracker___H, tracker___W
+# full == TRUE: add one trackers: tracker___ALL
 epi_tracker_by_race <- function(ls_funs, races = 1:3,
                                 races_names = c("B", "H", "W"),
                                 indiv = TRUE, full = TRUE) {
@@ -36,7 +39,6 @@ epi_n <- function(r_ind) {
 }
 
 # HIV Trackers
-
 epi_s <- function(r_ind) {
   function(dat, at) {
     needed_attributes <- c("race", "status")
@@ -46,6 +48,7 @@ epi_s <- function(r_ind) {
   }
 }
 
+# eligible to prep
 epi_s_prep_elig <- function(r_ind) {
   function(dat, at) {
     needed_attributes <- c("race", "status", "prepElig")
@@ -55,6 +58,7 @@ epi_s_prep_elig <- function(r_ind) {
   }
 }
 
+# on prep
 epi_s_prep <- function(r_ind) {
   function(dat, at) {
     needed_attributes <- c("race", "status", "prepStat")
@@ -112,6 +116,7 @@ epi_i_sup_dur <- function(r_ind) {
   }
 }
 
+# linked in less than `weeks` step
 epi_linked_time <- function(weeks) {
   function(r_ind) {
     function(dat, at) {
@@ -189,170 +194,5 @@ epi_ct_s <- function(hiv_status) {
         )
       })
     }
-  }
-}
-
-epi_tt_traj <- function(traj) {
-  function(r_ind) {
-    function(dat, at) {
-      needed_attributes <- c("race", "tt.traj")
-      with(get_attr_list(dat, needed_attributes), {
-        sum(race %in% r_ind & tt.traj == traj, na.rm = TRUE)
-      })
-    }
-  }
-}
-
-epi_part_ident <- function(r_ind) {
-  function(dat, at) {
-    needed_attributes <- c("race", "part.ident")
-    with(get_attr_list(dat, needed_attributes), {
-      sum(race %in% r_ind & part.ident == at, na.rm = TRUE)
-    })
-  }
-}
-
-epi_part_spos <- function(r_ind) {
-  function(dat, at) {
-    needed_attributes <- c("race", "part.ident", "diag.time")
-    with(get_attr_list(dat, needed_attributes), {
-      sum(
-        race %in% r_ind &
-        part.ident == at &
-        diag.time == at,
-        na.rm = TRUE)
-    })
-  }
-}
-
-epi_part_sneg <- function(r_ind) {
-  function(dat, at) {
-    needed_attributes <- c("race", "part.ident", "last.neg.test")
-    with(get_attr_list(dat, needed_attributes), {
-      sum(
-        race %in% r_ind &
-        part.ident == at &
-        last.neg.test == at,
-        na.rm = TRUE)
-    })
-  }
-}
-
-epi_part_prep <- function(r_ind) {
-  function(dat, at) {
-    needed_attributes <- c("race", "part.ident", "prepStartTime")
-    with(get_attr_list(dat, needed_attributes), {
-      sum(
-        race %in% r_ind &
-        part.ident == at &
-        prepStartTime == at,
-        na.rm = TRUE)
-    })
-  }
-}
-
-epi_part_txinit <- function(r_ind) {
-  function(dat, at) {
-    needed_attributes <- c("race", "part.ident", "part.tx.init.time")
-    with(get_attr_list(dat, needed_attributes), {
-      sum(
-        race %in% r_ind &
-        part.ident == at &
-        part.tx.init.time == at,
-        na.rm = TRUE)
-    })
-  }
-}
-
-epi_part_txreinit <- function(r_ind) {
-  function(dat, at) {
-    needed_attributes <- c("race", "part.ident", "part.tx.reinit.time")
-    with(get_attr_list(dat, needed_attributes), {
-      sum(
-        race %in% r_ind &
-        part.ident == at &
-        part.tx.reinit.time == at,
-        na.rm = TRUE)
-    })
-  }
-}
-
-epi_ident_dist <- function(n_id, ge = FALSE) {
-  function(r_ind) {
-    function(dat, at) {
-      needed_attributes <- c("race", "part.ident.counter")
-      with(get_attr_list(dat, needed_attributes), {
-        if (n_id == 0) {
-          sum(
-            race %in% r_ind &
-            (is.na(part.ident.counter) | part.ident.counter == n_id),
-            na.rm = TRUE
-          )
-        } else if (ge) {
-          sum(race %in% r_ind & part.ident.counter >= n_id, na.rm = TRUE)
-        } else {
-          sum(race %in% r_ind & part.ident.counter == n_id, na.rm = TRUE)
-        }
-      })
-    }
-  }
-}
-
-epi_partner_count <- function(dat, at) {
-  if (at < get_param(dat, "part.ident.start")) return(NA)
-
-  needed_attributes <- c("diag.status", "diag.time", "uid")
-  with(get_attr_list(dat, needed_attributes), {
-    hivpos.at <- which(diag.status == 1 & diag.time == at)
-    hivpos.uid <- uid[hivpos.at]
-    plist.temp <- dat$temp$plist
-    p1_pos <- plist.temp[, "p1"] %in% hivpos.uid
-    p2_pos <- plist.temp[, "p2"] %in% hivpos.uid
-    plist <- plist.temp[p1_pos | p2_pos, , drop = FALSE]
-
-    if (nrow(plist) == 0) {
-      out <- NA
-    } else {
-      out <- 0
-      for (rel_type in seq_len(3)) {
-        p <- plist[plist[, 3] == rel_type, , drop = FALSE]
-        out <- out + nrow(p) * 1e3^(rel_type - 1)
-      }
-    }
-
-    out
-  })
-}
-
-epi_prep_start <- function(r_ind) {
-  function(dat, at) {
-    needed_attributes <- c("race", "prepStartTime")
-    with(get_attr_list(dat, needed_attributes), {
-      sum(
-        race %in% r_ind &
-        prepStartTime == at,
-        na.rm = TRUE)
-    })
-  }
-}
-
-epi_prep_time_on <- function(r_ind) {
-  function(dat, at) {
-    needed_attributes <- c("race", "prepStat", "prepStartTime")
-    with(get_attr_list(dat, needed_attributes), {
-      pop <- race %in% r_ind & prepStat == 1
-      prepStartTime <- prepStartTime[pop]
-      mean(at - prepStartTime, na.rm = TRUE)
-    })
-  }
-}
-
-epi_prep_episodes <- function(r_ind) {
-  function(dat, at) {
-    needed_attributes <- c("race", "prepStat", "prep.start.counter")
-    with(get_attr_list(dat, needed_attributes), {
-      pop <- race %in% r_ind & prepStat == 1
-      mean(prep.start.counter[pop], na.rm = TRUE)
-    })
   }
 }
