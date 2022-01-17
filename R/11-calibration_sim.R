@@ -29,10 +29,7 @@ control <- control_msm(
   ncores = ncores,
   cumulative.edgelist = TRUE,
   truncate.el.cuml = 0,
-  verbose = TRUE,
-  # verbose.int = 250,
-  # verbose.FUN = verbose.hpc.net,
-  # trackers.FUN = trackers.net,
+  verbose = FALSE,
   tracker.list = calibration_trackers
 )
 
