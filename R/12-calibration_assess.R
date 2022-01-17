@@ -46,4 +46,4 @@ assessments <- assessments %>%
   ))
 
 # Save the result --------------------------------------------------------------
-saveRDS(calib_dir, "/assessments.rds")
+saveRDS(assessments, paste0(calib_dir, "/assessments.rds"))
