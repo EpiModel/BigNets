@@ -9,7 +9,7 @@ if (fs::dir_exists("workflows/calibration"))
   fs::dir_delete("workflows/calibration")
 
 setup_script <- "sh/loadR_klone.sh"
-max_cores <- 20
+max_cores <- 16
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
@@ -72,6 +72,9 @@ wf <- add_workflow_step(
   sbatch_opts = list(
     "cpus-per-task" = max_cores,
     "time" = "04:00:00",
-    "mem-per-cpu" = "4G"
+    "mem-per-cpu" = "4G",
+    "mail-type" = "END"
   )
 )
+
+# scp klone.hyak.uw.edu:gscratch/BigNets/data/output/calib/assessments.rds data/output/calib/

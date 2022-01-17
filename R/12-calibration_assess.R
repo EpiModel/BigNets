@@ -42,7 +42,7 @@ assessments <- assessments %>%
       q2 = ~ quantile(.x, 0.50, na.rm = TRUE),
       q3 = ~ quantile(.x, 0.75, na.rm = TRUE)
     ),
-    .names = "{.col}_/_{.fn}"
+    .names = "{.col}__{.fn}"
   ))
 
 # Save the result --------------------------------------------------------------

@@ -69,3 +69,5 @@ wf <- add_workflow_step(
     "mem-per-cpu" = "4G"
   )
 )
+
+# scp -r klone.hyak.uw.edu:gscratch/BigNets/data/input data/
