@@ -13,7 +13,7 @@ netstats <- readRDS("data/input/netstats.rds")
 est <- readRDS("data/input/netest.rds")
 
 # Relevant times
-calibration_length <- 52 * 20
+calibration_length <- 52 * 10
 prep_start         <- calibration_length + 52 * 5 + 1
 interv_start       <- prep_start + 52 * 5
 nsteps             <- interv_start + 52 * 10 - 1

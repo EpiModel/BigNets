@@ -15,8 +15,8 @@ max_cores <- 40
 wf <- create_workflow(
   wf_name = "calibration",
   default_sbatch_opts = list(
-    "account" = "csde",
-    "partition" = "compute",
+    "account" = "csde-ckpt",
+    "partition" = "ckpt",
     "mail-type" = "FAIL"
   )
 )
