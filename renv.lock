@@ -35,10 +35,10 @@
     },
     "DBI": {
       "Package": "DBI",
-      "Version": "1.1.1",
+      "Version": "1.1.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "030aaec5bc6553f35347cbb1e70b1a17"
+      "Hash": "dcd1743af4336156873e3ce3c950b8b9"
     },
     "DEoptimR": {
       "Package": "DEoptimR",
@@ -120,10 +120,10 @@
     },
     "ape": {
       "Package": "ape",
-      "Version": "5.5",
+      "Version": "5.6",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "8927e35d3da343034928548484e5eda7"
+      "Hash": "f301abb98dffa27f7a961e7f95ab8197"
     },
     "cachem": {
       "Package": "cachem",
@@ -253,10 +253,10 @@
     },
     "glue": {
       "Package": "glue",
-      "Version": "1.5.1",
+      "Version": "1.6.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e01bc1fe0c20954ec97eac86640abc70"
+      "Hash": "b8bb7aaf248e45bac08ebed86f3a0aa4"
     },
     "gtable": {
       "Package": "gtable",
