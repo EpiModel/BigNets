@@ -61,12 +61,12 @@
       "Version": "2.2.0",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModel",
       "RemoteRef": "param_df",
-      "RemoteSha": "4455059bad7eb90a8708eafd5cd012503f6680ef",
-      "Hash": "8001891b172373a2366e2cadc676733b",
+      "RemoteSha": "ef79cb7c98af1abfca809f1a23a700fcfcac573c",
+      "RemoteHost": "api.github.com",
+      "Hash": "1e840299a23294838210c5eac0bb6fcb",
       "Requirements": [
         "RColorBrewer",
         "Rcpp",
@@ -127,10 +127,10 @@
     },
     "MASS": {
       "Package": "MASS",
-      "Version": "7.3-54",
+      "Version": "7.3-55",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "0e59129db205112e3963904db67fd0dc",
+      "Hash": "c5232ffb549f6d7a04a152c34ca1353d",
       "Requirements": []
     },
     "Matrix": {
@@ -161,10 +161,10 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.0.7",
+      "Version": "1.0.8",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "dab19adae4440ae55aa8a9d238b246bb",
+      "Hash": "22b546dd7e337f6c0c58a39983a496bc",
       "Requirements": []
     },
     "ape": {
@@ -192,10 +192,10 @@
     },
     "cli": {
       "Package": "cli",
-      "Version": "3.1.0",
+      "Version": "3.1.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "66a3834e54593c89d8beefb312347e58",
+      "Hash": "da5160e769a652e3ec7111d63883f9bc",
       "Requirements": [
         "glue"
       ]
@@ -315,10 +315,10 @@
     },
     "fansi": {
       "Package": "fansi",
-      "Version": "1.0.0",
+      "Version": "1.0.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "ae34c3d1fdfac1566ca17c1b5d8f2613",
+      "Hash": "f28149c2d7a1342a834b314e95e67260",
       "Requirements": []
     },
     "farver": {
@@ -419,10 +419,10 @@
     },
     "glue": {
       "Package": "glue",
-      "Version": "1.6.0",
+      "Version": "1.6.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "b8bb7aaf248e45bac08ebed86f3a0aa4",
+      "Hash": "de07842fc27ebf60e1102091c0c85e47",
       "Requirements": []
     },
     "gtable": {
@@ -585,10 +585,10 @@
     },
     "nlme": {
       "Package": "nlme",
-      "Version": "3.1-153",
+      "Version": "3.1-155",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "2d632e0d963a653a0329756ce701ecdd",
+      "Hash": "74ad940dccc9e977189a5afe5fcdb7ba",
       "Requirements": [
         "lattice"
       ]
@@ -655,10 +655,10 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "0.15.0",
+      "Version": "0.15.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "36c1a644e5b0ba8050f40f07ea1dae62",
+      "Hash": "206c4ef8b7ad6fb1060d69aa7b9dfe69",
       "Requirements": []
     },
     "rlang": {
@@ -708,12 +708,12 @@
       "Version": "0.0.0.9000",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteUsername": "adrienleguillou",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "EpiModel",
       "RemoteRepo": "slurmworkflow",
       "RemoteRef": "main",
-      "RemoteSha": "2fb759e7d60321cb2d0c72aa8a6298ca5d223d1a",
-      "RemoteHost": "api.github.com",
-      "Hash": "80ad7f4cf9ba732c8c6e02466a9d32df",
+      "RemoteSha": "22a1f89d1362436f5af1e8158fce71184f49d33c",
+      "Hash": "9ec570106b6660f083fa60079eb34765",
       "Requirements": [
         "fs",
         "yaml"
