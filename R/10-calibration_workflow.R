@@ -9,7 +9,7 @@ if (fs::dir_exists("workflows/calibration"))
   fs::dir_delete("workflows/calibration")
 
 setup_script <- "sh/loadR_klone.sh"
-max_cores <- 16 # only 16 cores to avoid OOM errors
+max_cores <- 28 # only 16 cores to avoid OOM errors
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
@@ -26,6 +26,7 @@ wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_renv_restore(setup_script = setup_script),
   sbatch_opts = list(
+    "partition" = "build",
     "mem" = "16G",
     "cpus-per-task" = 4,
     "time" = 120

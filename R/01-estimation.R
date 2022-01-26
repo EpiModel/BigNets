@@ -35,7 +35,7 @@ netstats <- build_netstats(
   epistats,
   netparams,
   expect.mort = 0.000478213,
-  network.size = 1e5
+  network.size = 1e4
 )
 saveRDS(netstats, file = "data/input/netstats.rds")
 
@@ -82,8 +82,8 @@ fit_main <- netest(
   coef.diss = netstats$main$diss.byage,
   set.control.ergm = control.ergm(
     MCMLE.maxit = 500,
-    SAN.maxit = 4,
-    SAN.nsteps.times = 10,
+    SAN.maxit = 3,
+    SAN.nsteps.times = 4,
     MCMC.samplesize = 10000,
     MCMC.interval = 5000,
     parallel = ncores
@@ -127,8 +127,8 @@ fit_casl <- netest(
   coef.diss = netstats$casl$diss.byage,
   set.control.ergm = control.ergm(
     MCMLE.maxit = 500,
-    SAN.maxit = 4,
-    SAN.nsteps.times = 10,
+    SAN.maxit = 3,
+    SAN.nsteps.times = 4,
     MCMC.samplesize = 10000,
     MCMC.interval = 5000,
     parallel = ncores
@@ -170,8 +170,8 @@ fit_inst <- netest(
   coef.diss = dissolution_coefs(~ offset(edges), 1),
   set.control.ergm = control.ergm(
     MCMLE.maxit = 500,
-    SAN.maxit = 4,
-    SAN.nsteps.times = 10,
+    SAN.maxit = 3,
+    SAN.nsteps.times = 4,
     MCMC.samplesize = 10000,
     MCMC.interval = 5000,
     parallel = ncores

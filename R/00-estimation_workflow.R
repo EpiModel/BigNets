@@ -13,15 +13,15 @@ if (fs::dir_exists("workflows/estimation"))
   fs::dir_delete("workflows/estimation")
 
 # setup_script contains the bash script used to load the R module on the HPC
-setup_script <- "sh/loadR_klone.sh"
-max_cores <- 32
+setup_script <- "sh/loadR_mox.sh"
+max_cores <- 28
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
   wf_name = "estimation",
   default_sbatch_opts = list(
     "account" = "csde",
-    "partition" = "compute",
+    "partition" = "csde",
     "mail-type" = "FAIL"
   )
 )
@@ -35,6 +35,7 @@ wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_renv_restore(setup_script = setup_script),
   sbatch_opts = list(
+    "partition" = "build",
     "mem" = "16G",
     "cpus-per-task" = 4,
     "time" = 120
@@ -81,8 +82,8 @@ wf <- add_workflow_step(
 )
 
 # to send the workflows on the HPC
-# scp -r workflows klone.hyak.uw.edu:gscratch/BigNets/
-# from the BigNets folder on Klone: workflows/estimation/start_workflow.sh
+# scp -r workflows/estimation <user>@mox.hyak.uw.edu:gscratch/BigNets/workflows/
+# from the BigNets folder on Mox: workflows/estimation/start_workflow.sh
 
 # to get the data back
-# scp -r klone.hyak.uw.edu:gscratch/BigNets/data/input data/
+# scp -r <user>@mox.hyak.uw.edu:gscratch/BigNets/data/input data/
