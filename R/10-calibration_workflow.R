@@ -9,7 +9,7 @@ if (fs::dir_exists("workflows/calibration"))
   fs::dir_delete("workflows/calibration")
 
 setup_script <- "sh/loadR_mox.sh"
-max_cores <- 28 # only 16 cores to avoid OOM errors
+max_cores <- 28
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
