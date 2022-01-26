@@ -72,7 +72,7 @@ wf <- add_workflow_step(
     r_script = "R/12-calibration_process.R",
     args = list(
       ncores = 15,
-      nsteps = 1e3
+      nsteps = 52
     ),
     setup_script = setup_script
   ),

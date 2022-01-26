@@ -2,13 +2,10 @@
 ## 00. Network Model Estimation, HPC setup
 ##
 
-# how to get hpc limits:
-#   sinfo <partition> -O Partition,Memory
-#   scontrol show config
-
 # Setup ------------------------------------------------------------------------
 library(slurmworkflow)
 
+# Delete the workflow directory if it exists
 if (fs::dir_exists("workflows/estimation"))
   fs::dir_delete("workflows/estimation")
 
