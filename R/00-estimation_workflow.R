@@ -5,22 +5,13 @@
 # Setup ------------------------------------------------------------------------
 library(slurmworkflow)
 
-# Delete the workflow directory if it exists
-if (fs::dir_exists("workflows/estimation"))
-  fs::dir_delete("workflows/estimation")
-
-# setup_script contains the bash script used to load the R module on the HPC
-setup_script <- "sh/loadR_mox.sh"
+hpc_configs <- EpiModelHPC::swf_configs_hyak(hpc = "mox", partition = "csde")
 max_cores <- 28
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
   wf_name = "estimation",
-  default_sbatch_opts = list(
-    "account" = "csde",
-    "partition" = "csde",
-    "mail-type" = "FAIL"
-  )
+  default_sbatch_opts = hpc_configs$default_sbatch_opts
 )
 
 # Update RENV on the HPC -------------------------------------------------------
@@ -30,13 +21,8 @@ wf <- create_workflow(
 #   renv::restore()
 wf <- add_workflow_step(
   wf_summary = wf,
-  step_tmpl = step_tmpl_renv_restore(setup_script = setup_script),
-  sbatch_opts = list(
-    "partition" = "build",
-    "mem" = "16G",
-    "cpus-per-task" = 4,
-    "time" = 120
-  )
+  step_tmpl = step_tmpl_renv_restore(setup_lines = hpc_configs$r_loader),
+  sbatch_opts = hpc_configs$renv_sbatch_opts
 )
 
 # Estimate the networks --------------------------------------------------------
@@ -49,7 +35,7 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_do_call_script(
     r_script = "R/01-estimation.R",
     args = list(ncores = max_cores),
-    setup_script = setup_script
+    setup_lines = hpc_configs$r_loader
   ),
   sbatch_opts = list(
     "cpus-per-task" = max_cores,
@@ -68,7 +54,7 @@ wf <- add_workflow_step(
       nsims = 30,
       nsteps = 1e3
     ),
-    setup_script = setup_script
+    setup_lines = hpc_configs$r_loader
   ),
   sbatch_opts = list(
     "cpus-per-task" = max_cores,

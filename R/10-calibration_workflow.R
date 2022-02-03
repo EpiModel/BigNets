@@ -5,39 +5,27 @@
 # Setup ------------------------------------------------------------------------
 library(slurmworkflow)
 
-if (fs::dir_exists("workflows/calibration"))
-  fs::dir_delete("workflows/calibration")
-
-setup_script <- "sh/loadR_mox.sh"
+hpc_configs <- EpiModelHPC::swf_configs_hyak(hpc = "mox", partition = "ckpt")
 max_cores <- 28
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
   wf_name = "calibration",
-  default_sbatch_opts = list(
-    "account" = "csde-ckpt",
-    "partition" = "ckpt",
-    "mail-type" = "FAIL"
-  )
+  default_sbatch_opts = hpc_configs$default_sbatch_opts
 )
 
 # Update RENV on the HPC -------------------------------------------------------
 wf <- add_workflow_step(
   wf_summary = wf,
-  step_tmpl = step_tmpl_renv_restore(setup_script = setup_script),
-  sbatch_opts = list(
-    "partition" = "build",
-    "mem" = "16G",
-    "cpus-per-task" = 4,
-    "time" = 120
-  )
+  step_tmpl = step_tmpl_renv_restore(setup_lines = hpc_configs$r_loader),
+  sbatch_opts = hpc_configs$renv_sbatch_opts
 )
 
 # Run the simulations ----------------------------------------------------------
-n_replications <- 10
+n_batches <- 10
 scenarios.df <- read.csv("data/input/calib_scenarios.csv")
 scenarios.list <- EpiModel:::make_scenarios_list(scenarios.df)
-scenarios.list <- rep(scenarios.list, n_replications)
+scenarios.list <- rep(scenarios.list, n_batches)
 
 # for this template, the syntax is similar to `base::Map` and `mapply`
 # in this case, each instance will have a different value of
@@ -55,7 +43,7 @@ wf <- add_workflow_step(
       ncores = max_cores
     ),
     max_array_size = 999,
-    setup_script = setup_script
+    setup_lines = hpc_configs$r_loader
   ),
   sbatch_opts = list(
     "cpus-per-task" = max_cores,
@@ -74,7 +62,7 @@ wf <- add_workflow_step(
       ncores = 15,
       nsteps = 52
     ),
-    setup_script = setup_script
+    setup_lines = hpc_configs$r_loader
   ),
   sbatch_opts = list(
     "cpus-per-task" = max_cores,

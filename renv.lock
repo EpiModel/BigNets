@@ -93,9 +93,9 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "HEAD",
-      "RemoteSha": "b1649f50bc2e004e743004b571fdb7260bb2eaf7",
+      "RemoteSha": "721635b8228d899a309cef9419996ac4d3f63963",
       "RemoteHost": "api.github.com",
-      "Hash": "f3e85725277ef73916ff819e64b06314",
+      "Hash": "5a5efdb3973ef4c6fec2d92b57e61a7b",
       "Requirements": [
         "EpiModel",
         "ergm",
@@ -110,12 +110,12 @@
       "Version": "2.1.2",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteUsername": "EpiModel",
-      "RemoteRepo": "EpiModelHPC",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "7a54ba8c850550f96fa9d2c2f19de69a9751db19",
+      "RemoteUsername": "epimodel",
+      "RemoteRepo": "epimodelhpc",
+      "RemoteRef": "swf_vignette",
+      "RemoteSha": "3c4b41920525f318bc8fb7faf02b594a51c3b3f4",
       "RemoteHost": "api.github.com",
-      "Hash": "e1a7137df55eb40c27e31d35ddce7951",
+      "Hash": "53902219290b06855d7206024fe55d8d",
       "Requirements": [
         "EpiModel",
         "doParallel",
@@ -339,10 +339,10 @@
     },
     "foreach": {
       "Package": "foreach",
-      "Version": "1.5.1",
+      "Version": "1.5.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e32cfc0973caba11b65b1fa691b4d8c9",
+      "Hash": "618609b42c9406731ead03adf5379850",
       "Requirements": [
         "codetools",
         "iterators"
@@ -382,10 +382,10 @@
     },
     "generics": {
       "Package": "generics",
-      "Version": "0.1.1",
+      "Version": "0.1.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "3f6bcfb0ee5d671d9fd1893d2faa79cb",
+      "Hash": "177475892cf4a55865868527654a7741",
       "Requirements": []
     },
     "ggplot2": {
@@ -502,10 +502,10 @@
     },
     "magrittr": {
       "Package": "magrittr",
-      "Version": "2.0.1",
+      "Version": "2.0.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "41287f1ac7d28a92f0a286ed507928d3",
+      "Hash": "cdc87ecd81934679d1557633d8e1fe51",
       "Requirements": []
     },
     "memoise": {
@@ -611,10 +611,10 @@
     },
     "pillar": {
       "Package": "pillar",
-      "Version": "1.6.5",
+      "Version": "1.7.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "464a3e015331eeb8efd1d239cad5128d",
+      "Hash": "51dfc97e1b7069e9f7e6f83f3589c22e",
       "Requirements": [
         "cli",
         "crayon",
@@ -664,10 +664,10 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "0.4.12",
+      "Version": "1.0.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "0879f5388fe6e4d56d7ef0b7ccb031e5",
+      "Hash": "3bf0219f19d9f5b3c682acbb3546a151",
       "Requirements": []
     },
     "rle": {
@@ -709,12 +709,12 @@
       "Version": "0.0.0.9000",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "slurmworkflow",
-      "RemoteRef": "main",
-      "RemoteSha": "68008892fba711fed87e4102d544eae30fcf6c09",
-      "RemoteHost": "api.github.com",
-      "Hash": "3a0785ff201ee2c3e648ad31442af123",
+      "RemoteRef": "setup_lines",
+      "RemoteSha": "aa1fcd815548e87837ae9803f1568ba18396cc45",
+      "Hash": "8feeb96f2a2ca243719b83c9ce15905d",
       "Requirements": [
         "fs",
         "yaml"
