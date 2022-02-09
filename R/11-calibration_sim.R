@@ -35,7 +35,7 @@ control <- control_msm(
 param <- use_scenario(param, scenario)
 
 # Simulation -------------------------------------------------------------------
-print(paste0("Starting simulation for scenario: ", scenario_name))
+print(paste0("Starting simulation for scenario: ", scenario[["id"]]))
 print(paste0("Batch number: ", batch_num))
 sim <- netsim(est, param, init, control)
 
