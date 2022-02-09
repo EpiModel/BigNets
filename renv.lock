@@ -59,14 +59,10 @@
     "EpiModel": {
       "Package": "EpiModel",
       "Version": "2.2.0",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteUsername": "EpiModel",
-      "RemoteRepo": "EpiModel",
-      "RemoteRef": "param_df",
-      "RemoteSha": "940358f44f57323e6c12602e9b1243b94dd4c094",
-      "RemoteHost": "api.github.com",
-      "Hash": "d8dc904a86a530063bb5768753a19829",
+      "Source": "Local",
+      "RemoteType": "local",
+      "RemoteUrl": "../EpiModel.git/param_df",
+      "Hash": "b11510a38ba2e1697c0d89e9a51bf295",
       "Requirements": [
         "RColorBrewer",
         "Rcpp",
@@ -93,9 +89,9 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "HEAD",
-      "RemoteSha": "721635b8228d899a309cef9419996ac4d3f63963",
+      "RemoteSha": "854e6ed9addcbbdcdb66be00d43356a532f9efca",
       "RemoteHost": "api.github.com",
-      "Hash": "5a5efdb3973ef4c6fec2d92b57e61a7b",
+      "Hash": "45ce9ba760de966d467605c446fac266",
       "Requirements": [
         "EpiModel",
         "ergm",
@@ -113,9 +109,9 @@
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodelhpc",
       "RemoteRef": "swf_vignette",
-      "RemoteSha": "3c4b41920525f318bc8fb7faf02b594a51c3b3f4",
+      "RemoteSha": "8c530418588c68ed83e06119d43dae1447d44b18",
       "RemoteHost": "api.github.com",
-      "Hash": "53902219290b06855d7206024fe55d8d",
+      "Hash": "92755080511f82293eda11a3874247d7",
       "Requirements": [
         "EpiModel",
         "doParallel",
@@ -242,6 +238,18 @@
       "Hash": "b966ebcb01c2bce92c42999d5aff52cd",
       "Requirements": []
     },
+    "desc": {
+      "Package": "desc",
+      "Version": "1.4.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "28763d08fadd0b733e3cee9dab4e12fe",
+      "Requirements": [
+        "R6",
+        "crayon",
+        "rprojroot"
+      ]
+    },
     "digest": {
       "Package": "digest",
       "Version": "0.6.29",
@@ -252,10 +260,10 @@
     },
     "doParallel": {
       "Package": "doParallel",
-      "Version": "1.0.16",
+      "Version": "1.0.17",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "2dc413572eb42475179bfe0afabd2adf",
+      "Hash": "451e5edf411987991ab6a5410c45011f",
       "Requirements": [
         "foreach",
         "iterators"
@@ -263,13 +271,12 @@
     },
     "dplyr": {
       "Package": "dplyr",
-      "Version": "1.0.7",
+      "Version": "1.0.8",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "36f1ae62f026c8ba9f9b5c9a08c03297",
+      "Hash": "ef47665e64228a17609d6df877bf86f2",
       "Requirements": [
         "R6",
-        "ellipsis",
         "generics",
         "glue",
         "lifecycle",
@@ -443,10 +450,10 @@
     },
     "iterators": {
       "Package": "iterators",
-      "Version": "1.0.13",
+      "Version": "1.0.14",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "64778782a89480e9a644f69aad9a2877",
+      "Hash": "8954069286b4b2b0d023d1b288dce978",
       "Requirements": []
     },
     "labeling": {
@@ -635,6 +642,22 @@
       "Hash": "01f28d4278f15c76cddbea05899c5d6f",
       "Requirements": []
     },
+    "pkgload": {
+      "Package": "pkgload",
+      "Version": "1.2.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "7533cd805940821bf23eaf3c8d4c1735",
+      "Requirements": [
+        "cli",
+        "crayon",
+        "desc",
+        "rlang",
+        "rprojroot",
+        "rstudioapi",
+        "withr"
+      ]
+    },
     "purrr": {
       "Package": "purrr",
       "Version": "0.3.4",
@@ -687,6 +710,22 @@
       "Requirements": [
         "DEoptimR"
       ]
+    },
+    "rprojroot": {
+      "Package": "rprojroot",
+      "Version": "2.0.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "249d8cd1e74a8f6a26194a91b47f21d1",
+      "Requirements": []
+    },
+    "rstudioapi": {
+      "Package": "rstudioapi",
+      "Version": "0.13",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "06c85365a03fdaf699966cc1d3cf53ea",
+      "Requirements": []
     },
     "scales": {
       "Package": "scales",
