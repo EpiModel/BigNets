@@ -711,9 +711,9 @@
       "RemoteUsername": "epimodel",
       "RemoteRepo": "slurmworkflow",
       "RemoteRef": "main",
-      "RemoteSha": "a9143133f1191d5329515391e1b870a6fd412ba2",
+      "RemoteSha": "c881c8129910208faadff5419bed540317f10631",
       "RemoteHost": "api.github.com",
-      "Hash": "2d1b83c59366c5c15036134ade27e925",
+      "Hash": "94fd2a0834ffce4b142080611bd2299b",
       "Requirements": [
         "fs",
         "yaml"
