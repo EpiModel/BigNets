@@ -21,6 +21,8 @@ scenarios.df <- read.csv("data/input/calib_scenarios.csv")
 scenarios.list <- EpiModel::make_scenarios_list(scenarios.df)
 scenarios.list <- rep(scenarios.list, n_batches)
 
+param <- use_scenario(param, scenarios.list[[4]])
+
 # Simulation -------------------------------------------------------------------
 sim <- netsim(est, param, init, control)
 

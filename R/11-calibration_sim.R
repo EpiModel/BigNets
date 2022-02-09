@@ -42,7 +42,8 @@ sim <- netsim(est, param, init, control)
 ## Save the simulation
 #  I am not very familiar with the `savesim` workflow so I am doing it this
 #  way for now
-file_name <- paste0("simcalib__", batch_num, ".rds")
+
+file_name <- paste0("simcalib__", scenario[["id"]], "__", batch_num, ".rds")
 
 saveRDS(sim, paste0(output_dir, "/", file_name))
 

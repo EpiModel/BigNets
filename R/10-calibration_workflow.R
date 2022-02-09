@@ -5,7 +5,8 @@
 # Setup ------------------------------------------------------------------------
 library(slurmworkflow)
 
-hpc_configs <- EpiModelHPC::swf_configs_hyak(hpc = "mox", partition = "ckpt")
+# hpc_configs <- EpiModelHPC::swf_configs_hyak(hpc = "mox", partition = "csde")
+hpc_configs <- EpiModelHPC::swf_configs_rsph(partition = "preemptable")
 max_cores <- 28
 
 # Workflow creation ------------------------------------------------------------
@@ -22,7 +23,6 @@ wf <- add_workflow_step(
 )
 
 # Run the simulations ----------------------------------------------------------
-pkgload::load_all("../EpiModel.git/param_df")
 n_batches <- 10
 scenarios.df <- read.csv("data/input/calib_scenarios.csv")
 scenarios.list <- EpiModel::make_scenarios_list(scenarios.df)
