@@ -15,6 +15,12 @@ control <- control_msm(
   verbose = TRUE,
   tracker.list = calibration_trackers
 )
+
+n_batches <- 10
+scenarios.df <- read.csv("data/input/calib_scenarios.csv")
+scenarios.list <- EpiModel::make_scenarios_list(scenarios.df)
+scenarios.list <- rep(scenarios.list, n_batches)
+
 # Simulation -------------------------------------------------------------------
 sim <- netsim(est, param, init, control)
 

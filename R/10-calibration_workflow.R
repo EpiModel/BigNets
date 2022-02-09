@@ -22,9 +22,10 @@ wf <- add_workflow_step(
 )
 
 # Run the simulations ----------------------------------------------------------
+pkgload::load_all("../EpiModel.git/param_df")
 n_batches <- 10
 scenarios.df <- read.csv("data/input/calib_scenarios.csv")
-scenarios.list <- EpiModel:::make_scenarios_list(scenarios.df)
+scenarios.list <- EpiModel::make_scenarios_list(scenarios.df)
 scenarios.list <- rep(scenarios.list, n_batches)
 
 # for this template, the syntax is similar to `base::Map` and `mapply`
@@ -37,7 +38,6 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_map_script(
     r_script = "R/11-calibration_sim.R",
     scenario = scenarios.list,
-    scenario_name = names(scenarios.list),
     batch_num = seq_along(scenarios.list),
     MoreArgs = list(
       ncores = max_cores

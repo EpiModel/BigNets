@@ -4,7 +4,6 @@
 
 # Required variables:
 #   - `scenario`
-#   - `scenario_name`
 #   - `batch_num`
 #   - `ncores`
 
@@ -33,7 +32,7 @@ control <- control_msm(
 )
 
 # apply the scenario to the parameters
-param <- update_params(param, scenario)
+param <- use_scenario(param, scenario)
 
 # Simulation -------------------------------------------------------------------
 print(paste0("Starting simulation for scenario: ", scenario_name))
@@ -43,7 +42,8 @@ sim <- netsim(est, param, init, control)
 ## Save the simulation
 #  I am not very familiar with the `savesim` workflow so I am doing it this
 #  way for now
-file_name <- paste0("simcalib__", scenario_name, "__", batch_num, ".rds")
+file_name <- paste0("simcalib__", batch_num, ".rds")
+
 saveRDS(sim, paste0(output_dir, "/", file_name))
 
 # I think we can also set simno = batch_num and then use savesim (maybe)

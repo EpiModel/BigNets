@@ -5,7 +5,8 @@
 # Setup ------------------------------------------------------------------------
 library(slurmworkflow)
 
-hpc_configs <- EpiModelHPC::swf_configs_hyak(hpc = "mox", partition = "csde")
+# hpc_configs <- EpiModelHPC::swf_configs_hyak(hpc = "mox", partition = "csde")
+hpc_configs <- EpiModelHPC::swf_configs_rsph(partition = "epimodel")
 max_cores <- 28
 
 # Workflow creation ------------------------------------------------------------
