@@ -708,12 +708,12 @@
       "Version": "0.0.0.9000",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "epimodel",
       "RemoteRepo": "slurmworkflow",
       "RemoteRef": "main",
-      "RemoteSha": "2f83151b4304d61fe286e76cef56574d04737f06",
-      "Hash": "10e9ae21e531286eea4d109afdd044b0",
+      "RemoteSha": "a9143133f1191d5329515391e1b870a6fd412ba2",
+      "RemoteHost": "api.github.com",
+      "Hash": "2d1b83c59366c5c15036134ade27e925",
       "Requirements": [
         "fs",
         "yaml"
