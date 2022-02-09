@@ -18,6 +18,7 @@ control <- control_msm(
 
 n_batches <- 10
 scenarios.df <- read.csv("data/input/calib_scenarios.csv")
+scenarios.df[[".at"]][4] <- 10
 scenarios.list <- EpiModel::make_scenarios_list(scenarios.df)
 scenarios.list <- rep(scenarios.list, n_batches)
 
