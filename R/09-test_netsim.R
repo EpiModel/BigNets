@@ -7,8 +7,8 @@ source("R/utils-netsim_inputs.R")
 source("R/utils-targets.R")
 
 control <- control_msm(
-  nsteps = 50,
-  nsims = 2,
+  nsteps = 20,
+  nsims = 1,
   ncores = 1,
   cumulative.edgelist = TRUE,
   truncate.el.cuml = 0,
@@ -26,6 +26,7 @@ param <- use_scenario(param, scenarios.list[[4]])
 
 # Simulation -------------------------------------------------------------------
 sim <- netsim(est, param, init, control)
+sim$param
 
 # Exploration ------------------------------------------------------------------
 d_sim <- as.data.frame(sim)
