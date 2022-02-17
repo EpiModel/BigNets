@@ -11,15 +11,15 @@
   "Packages": {
     "ARTnet": {
       "Package": "ARTnet",
-      "Version": "2.5.5",
+      "Version": "2.5.6",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "epimodel",
       "RemoteRepo": "artnet",
-      "RemoteRef": "fix-casl-durs",
-      "RemoteSha": "f1c1fe691740791ef10911a3364dc327cf232fbf",
-      "Hash": "b1178304939d4ddc4b7cbd71474ef900",
+      "RemoteRef": "main",
+      "RemoteSha": "61c5ede2535ca4f7f40b8148851ddfe6cca2f74d",
+      "Hash": "08d4baa838bbf63c3b60e5f8915b3aea",
       "Requirements": [
         "ARTnetData",
         "EpiModel",
