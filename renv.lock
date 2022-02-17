@@ -11,19 +11,20 @@
   "Packages": {
     "ARTnet": {
       "Package": "ARTnet",
-      "Version": "2.5.5",
+      "Version": "2.5.0",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteUsername": "EpiModel",
-      "RemoteRepo": "ARTnet",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "bbc75b37048389a9b7bff24e8e2882480b3a0d5c",
       "RemoteHost": "api.github.com",
-      "Hash": "93634b17b3a95e10f628a5e44919a2f9",
+      "RemoteUsername": "epimodel",
+      "RemoteRepo": "artnet",
+      "RemoteRef": "26604a03a820ac7d70104551e9a7b785356609a7",
+      "RemoteSha": "26604a03a820ac7d70104551e9a7b785356609a7",
+      "Hash": "e207850f108a51354fe8f0f389879c3f",
       "Requirements": [
         "ARTnetData",
         "EpiModel",
-        "dplyr"
+        "dplyr",
+        "survey"
       ]
     },
     "ARTnetData": {
@@ -37,6 +38,14 @@
       "RemoteRef": "HEAD",
       "RemoteSha": "bd7993f9639294b05496390079fcf27778977b08",
       "Hash": "2e0abfad8da3e5e2e6271db63bdd025d",
+      "Requirements": []
+    },
+    "DBI": {
+      "Package": "DBI",
+      "Version": "1.1.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "dcd1743af4336156873e3ce3c950b8b9",
       "Requirements": []
     },
     "DEoptimR": {
@@ -520,6 +529,26 @@
         "nlme"
       ]
     },
+    "minqa": {
+      "Package": "minqa",
+      "Version": "1.2.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "eaee7d2a6f3ed4491df868611cb064cc",
+      "Requirements": [
+        "Rcpp"
+      ]
+    },
+    "mitools": {
+      "Package": "mitools",
+      "Version": "2.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a4b659bd0528226724d55034f11ed7cb",
+      "Requirements": [
+        "DBI"
+      ]
+    },
     "munsell": {
       "Package": "munsell",
       "Version": "0.5.0",
@@ -562,6 +591,14 @@
       "Requirements": [
         "lattice"
       ]
+    },
+    "numDeriv": {
+      "Package": "numDeriv",
+      "Version": "2016.8-1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "df58958f293b166e4ab885ebcad90e02",
+      "Requirements": []
     },
     "parallelly": {
       "Package": "parallelly",
@@ -710,6 +747,31 @@
         "glue",
         "magrittr",
         "stringi"
+      ]
+    },
+    "survey": {
+      "Package": "survey",
+      "Version": "4.1-1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "8aec2bc6533a6d1e6ef43bbf0c20205a",
+      "Requirements": [
+        "Matrix",
+        "lattice",
+        "minqa",
+        "mitools",
+        "numDeriv",
+        "survival"
+      ]
+    },
+    "survival": {
+      "Package": "survival",
+      "Version": "3.2-13",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "6f0a0fadc63bc6570fe172770f15bbc4",
+      "Requirements": [
+        "Matrix"
       ]
     },
     "tergm": {
