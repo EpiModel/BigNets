@@ -29,7 +29,7 @@ netstats <- build_netstats(
   network.size = 102000/4
 )
 saveRDS(netstats, file = paste0("data/input/netstats-",
-                                netstats$network.size, ".rds"))
+                                netstats$demog$num, ".rds"))
 
 num <- netstats$demog$num
 nw <- EpiModel::network_initialize(num, directed = FALSE)
@@ -81,21 +81,6 @@ fit_main <- netest(nw_main,
                                                    MCMC.interval = 5000,
                                                    parallel = ncores),
                    verbose = FALSE)
-
-# fit_main <- netest(nw_main,
-#                    formation = model_main,
-#                    target.stats = netstats_main,
-#                    coef.diss = netstats$main$diss.byage,
-#                    set.control.ergm = control.ergm(init.method = "MPLE",
-#                                            MCMLE.effectiveSize = NULL,
-#                                            MCMC.burnin = 1e6,
-#                                            MCMC.interval = 1e5,
-#                                            MCMC.samplesize = 10000,
-#                                            init.MPLE.samplesize = 2e8,
-#                                            MPLE.constraints.ignore = TRUE,
-#                                            parallel = 10,
-#                                            SAN.nsteps = 2e8),
-#                    verbose = TRUE)
 
 
 
@@ -189,4 +174,22 @@ fit_inst$fit$newnetworks <- NULL
 
 out <- list(fit_main = fit_main, fit_casl = fit_casl, fit_inst = fit_inst)
 saveRDS(out, file = paste0("data/input/netest-",
-                           netstats$network.size, ".rds"))
+                           netstats$demog$num, ".rds"))
+
+
+# Extra Control Args ------------------------------------------------------
+
+# fit_main <- netest(nw_main,
+#                    formation = model_main,
+#                    target.stats = netstats_main,
+#                    coef.diss = netstats$main$diss.byage,
+#                    set.control.ergm = control.ergm(init.method = "MPLE",
+#                                            MCMLE.effectiveSize = NULL,
+#                                            MCMC.burnin = 1e6,
+#                                            MCMC.interval = 1e5,
+#                                            MCMC.samplesize = 10000,
+#                                            init.MPLE.samplesize = 2e8,
+#                                            MPLE.constraints.ignore = TRUE,
+#                                            parallel = 10,
+#                                            SAN.nsteps = 2e8),
+#                    verbose = TRUE)
