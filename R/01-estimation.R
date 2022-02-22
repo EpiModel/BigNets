@@ -7,8 +7,10 @@
 rm(list = ls())
 library("methods")
 suppressMessages(library("EpiModelHIV"))
+suppressMessages(library("EpiModelHPC"))
 suppressMessages(library("ARTnet"))
 
+pull_env_vars(num.vars = "NETSIZE")
 ncores <- parallel::detectCores() - 1
 
 # 0. Initialize Network ---------------------------------------------------
@@ -26,7 +28,7 @@ netstats <- build_netstats(
   epistats,
   netparams,
   expect.mort = 0.000478213,
-  network.size = 102000/4
+  network.size = NETSIZE
 )
 saveRDS(netstats, file = paste0("data/input/netstats-",
                                 netstats$demog$num, ".rds"))
