@@ -7,11 +7,16 @@
 rm(list = ls())
 library("methods")
 suppressMessages(library("EpiModelHIV"))
+suppressMessages(library("EpiModelHPC"))
 
-est <- readRDS("data/input/netest-100k.rds")
+pull_env_vars(num.vars = "NETSIZE")
 
-ncores <- 30
-nsims <- 30
+fn <- paste0("data/input/netest-", NETSIZE, ".rds")
+est <- readRDS(fn)
+
+ncores <- parallel::detectCores() - 1
+
+nsims <- 100
 nsteps <- 1000
 
 # Main --------------------------------------------------------------------
@@ -91,7 +96,8 @@ dx <- list(dx_main = dx_main, dx_main_static = dx_main_static,
            dx_casl = dx_casl, dx_casl_static = dx_casl_static,
            dx_inst = dx_inst)
 
-saveRDS(dx, file = "data/input/netdx.rds")
+fn <- fn <- paste0("data/input/netdx-", NETSIZE, ".rds")
+saveRDS(dx, file = fn)
 
 
 # Interactive Dx Analysis -------------------------------------------------
