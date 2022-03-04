@@ -23,6 +23,9 @@ if (!dir.exists("data/output/")) {
 if (!dir.exists("out/")) {
   dir.create("out/")
 }
+if (!dir.exists("workflows/")) {
+  dir.create("workflows/")
+}
 
 # 3. Helpful aliases
 rs <- function() .rs.restartR()
