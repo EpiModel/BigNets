@@ -7,7 +7,7 @@ library(slurmworkflow)
 
 # hpc_configs <- EpiModelHPC::swf_configs_hyak(hpc = "mox", partition = "csde")
 hpc_configs <- EpiModelHPC::swf_configs_rsph(partition = "epimodel")
-max_cores <- 28
+max_cores <- 32
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
@@ -51,8 +51,8 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_do_call_script(
     r_script = "R/02-diagnostics.R",
     args = list(
-      ncores = 15,
-      nsims = 30,
+      ncores = 30,
+      nsims = 100,
       nsteps = 1e3
     ),
     setup_lines = hpc_configs$r_loader
@@ -66,8 +66,8 @@ wf <- add_workflow_step(
 )
 
 # to send the workflows on the HPC
-# scp -r workflows/estimation <user>@mox.hyak.uw.edu:gscratch/BigNets/workflows/
+# scp -r workflows/estimation sph:/projects/epimodel/sjenness/BigNets/workflows/estimation
 # from the BigNets folder on Mox: workflows/estimation/start_workflow.sh
 
 # to get the data back
-# scp -r <user>@mox.hyak.uw.edu:gscratch/BigNets/data/input data/
+# scp -r sph:projects/epimodel/sjenness/BigNets/data/input data/input/
