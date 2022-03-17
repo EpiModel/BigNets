@@ -35,7 +35,7 @@ wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_do_call_script(
     r_script = "R/01-estimation.R",
-    args = list(ncores = max_cores),
+    args = list(ncores = max_cores, NETSIZE = 102000),
     setup_lines = hpc_configs$r_loader
   ),
   sbatch_opts = list(
