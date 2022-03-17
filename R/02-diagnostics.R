@@ -1,25 +1,23 @@
-
 ##
 ## 02. Network Model Diagnostics
 ##
 
-## Packages ##
-rm(list = ls())
-library("methods")
-suppressMessages(library("EpiModelHIV"))
-suppressMessages(library("EpiModelHPC"))
+# Required variables:
+#   - ncores
+#   - nsims
+#   - nsteps
+#   - NETSIZE
 
-pull_env_vars(num.vars = "NETSIZE")
+# Setup ------------------------------------------------------------------------
+suppressMessages({
+  library(EpiModelHIV)
+})
 
 fn <- paste0("data/input/netest-", NETSIZE, ".rds")
 est <- readRDS(fn)
 
-ncores <- parallel::detectCores() - 1
 
-nsims <- 100
-nsteps <- 1000
-
-# Main --------------------------------------------------------------------
+# Main -------------------------------------------------------------------------
 
 fit_main <- est[[1]]
 
@@ -45,8 +43,7 @@ dx_main_static <- EpiModel::netdx(
   nwstats.formula = model_main_dx, skip.dissolution = TRUE,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
 
-
-# Casual ------------------------------------------------------------------
+# Casual -----------------------------------------------------------------------
 
 fit_casl <- est[[2]]
 
@@ -72,8 +69,7 @@ dx_casl_static <- netdx(
   nwstats.formula = model_casl_dx, skip.dissolution = TRUE,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
 
-
-# One-Off -----------------------------------------------------------------
+# One-Off ----------------------------------------------------------------------
 
 fit_inst <- est[[3]]
 
@@ -98,35 +94,3 @@ dx <- list(dx_main = dx_main, dx_main_static = dx_main_static,
 
 fn <- fn <- paste0("data/input/netdx-", NETSIZE, ".rds")
 saveRDS(dx, file = fn)
-
-
-# Interactive Dx Analysis -------------------------------------------------
-
-if (interactive()) {
-
-netstats <- readRDS("data/input/netstats.rds")
-dx <- readRDS("data/input/netdx.rds")
-
-# Main
-print(dx$dx_main, digits = 2)
-plot(dx$dx_main)
-
-netstats$main
-
-print(dx$dx_main_static, digits = 2)
-plot(dx$dx_main_static)
-
-# Casual
-print(dx$dx_casl, digits = 2)
-plot(dx$dx_casl)
-
-netstats$casl
-
-print(dx$dx_casl_static, digits = 2)
-plot(dx$dx_casl_static)
-
-# Inst
-print(dx$dx_inst, digits = 2)
-plot(dx$dx_inst)
-
-}

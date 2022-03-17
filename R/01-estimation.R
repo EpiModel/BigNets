@@ -1,29 +1,33 @@
-
 ##
 ## 01. Network Model Estimation
 ##
 
+# Required variables:
+#   - ncores
+#   - NETSIZE
+
 ## Packages ##
-rm(list = ls())
 library("methods")
 suppressMessages(library("EpiModelHIV"))
 suppressMessages(library("EpiModelHPC"))
 suppressMessages(library("ARTnet"))
 
-pull_env_vars(num.vars = "NETSIZE")
-ncores <- parallel::detectCores() - 1
 
-# 0. Initialize Network ---------------------------------------------------
+# 0. Initialize Network --------------------------------------------------------
 
 epistats <- build_epistats(
   geog.lvl = "city",
   geog.cat = "Atlanta",
-  init.hiv.prev = c( 0.33, 0.137, 0.084),
+  init.hiv.prev = c(0.33, 0.137, 0.084),
   race = TRUE
 )
 saveRDS(epistats, file = "data/input/epistats.rds")
 
-netparams <- build_netparams(epistats = epistats, smooth.main.dur = TRUE)
+netparams <- build_netparams(
+  epistats = epistats,
+  smooth.main.dur = TRUE
+)
+
 netstats <- build_netstats(
   epistats,
   netparams,
@@ -41,12 +45,10 @@ attr.values <- netstats$attr
 nw <- EpiModel::set_vertex_attribute(nw, attr.names, attr.values)
 nw_main <- nw_casl <- nw_inst <- nw
 
-
-
-# 1. Main Model -----------------------------------------------------------
+# 1. Main Model ----------------------------------------------------------------
 
 # Formula
-model_main <- ~edges +
+model_main <- ~ edges +
   nodematch("age.grp", diff = TRUE) +
   nodefactor("age.grp", levels = -1) +
   nodematch("race", diff = FALSE) +
@@ -68,28 +70,32 @@ netstats_main <- c(
   degrange = 0,
   nodematch_role.class = c(0, 0)
 )
-cbind(netstats_main)
 netstats_main <- unname(netstats_main)
 
 # Fit model
-fit_main <- netest(nw_main,
-                   formation = model_main,
-                   target.stats = netstats_main,
-                   coef.diss = netstats$main$diss.byage,
-                   set.control.ergm = control.ergm(MCMLE.maxit = 500,
-                                                   SAN.maxit = 4,
-                                                   SAN.nsteps.times = 10,
-                                                   MCMC.samplesize = 10000,
-                                                   MCMC.interval = 5000,
-                                                   parallel = ncores),
-                   verbose = FALSE)
-
+fit_main <- netest(
+  nw_main,
+  formation = model_main,
+  target.stats = netstats_main,
+  coef.diss = netstats$main$diss.byage,
+  set.control.ergm = control.ergm(
+    MCMLE.maxit = 500,
+    SAN.maxit = 3,
+    SAN.nsteps.times = 4,
+    MCMC.samplesize = 10000,
+    MCMC.interval = 5000,
+    parallel = ncores
+  ),
+  verbose = FALSE
+)
+fit_main$fit$newnetworks <- NULL
 
 
 # 2. Casual Model ---------------------------------------------------------
 
+
 # Formula
-model_casl <- ~edges +
+model_casl <- ~ edges +
   nodematch("age.grp", diff = TRUE) +
   nodefactor("age.grp", levels = c(-1, -5)) +
   nodematch("race", diff = FALSE) +
@@ -111,27 +117,30 @@ netstats_casl <- c(
   degrange = 0,
   nodematch_role.class = c(0, 0)
 )
-cbind(netstats_casl)
 netstats_casl <- unname(netstats_casl)
 
 # Fit model
-fit_casl <- netest(nw_casl,
-                   formation = model_casl,
-                   target.stats = netstats_casl,
-                   coef.diss = netstats$casl$diss.byage,
-                   set.control.ergm = control.ergm(MCMLE.maxit = 500,
-                                                   SAN.maxit = 4,
-                                                   SAN.nsteps.times = 10,
-                                                   MCMC.samplesize = 10000,
-                                                   MCMC.interval = 5000,
-                                                   parallel = ncores),
-                   verbose = FALSE)
+fit_casl <- netest(
+  nw_casl,
+  formation = model_casl,
+  target.stats = netstats_casl,
+  coef.diss = netstats$casl$diss.byage,
+  set.control.ergm = control.ergm(
+    MCMLE.maxit = 500,
+    SAN.maxit = 3,
+    SAN.nsteps.times = 4,
+    MCMC.samplesize = 10000,
+    MCMC.interval = 5000,
+    parallel = ncores
+  ),
+  verbose = FALSE
+)
+fit_casl$fit$newnetworks <- NULL
 
-
-# 3. One-Off Model --------------------------------------------------------
+# 3. One-Off Model -------------------------------------------------------------
 
 # Formula
-model_inst <- ~edges +
+model_inst <- ~ edges +
   nodematch("age.grp", diff = FALSE) +
   nodefactor("age.grp", levels = -1) +
   nodematch("race", diff = FALSE) +
@@ -151,28 +160,27 @@ netstats_inst <- c(
   nodefactor_deg.tot = netstats$inst$nodefactor_deg.tot[-1],
   nodematch_role.class = c(0, 0)
 )
-cbind(netstats_inst)
 netstats_inst <- unname(netstats_inst)
 
 # Fit model
-fit_inst <- netest(nw_inst,
-                   formation = model_inst,
-                   target.stats = netstats_inst,
-                   coef.diss = dissolution_coefs(~offset(edges), 1),
-                   set.control.ergm = control.ergm(MCMLE.maxit = 500,
-                                                   SAN.maxit = 4,
-                                                   SAN.nsteps.times = 10,
-                                                   MCMC.samplesize = 10000,
-                                                   MCMC.interval = 5000,
-                                                   parallel = ncores),
-                   verbose = FALSE)
-
-
-# 4. Save Data ------------------------------------------------------------
-
-fit_main$fit$newnetworks <- NULL
-fit_casl$fit$newnetworks <- NULL
+fit_inst <- netest(
+  nw_inst,
+  formation = model_inst,
+  target.stats = netstats_inst,
+  coef.diss = dissolution_coefs(~ offset(edges), 1),
+  set.control.ergm = control.ergm(
+    MCMLE.maxit = 500,
+    SAN.maxit = 3,
+    SAN.nsteps.times = 4,
+    MCMC.samplesize = 10000,
+    MCMC.interval = 5000,
+    parallel = ncores
+  ),
+  verbose = FALSE
+)
 fit_inst$fit$newnetworks <- NULL
+
+# 4. Save Data -----------------------------------------------------------------
 
 out <- list(fit_main = fit_main, fit_casl = fit_casl, fit_inst = fit_inst)
 saveRDS(out, file = paste0("data/input/netest-",
@@ -195,3 +203,4 @@ saveRDS(out, file = paste0("data/input/netest-",
 #                                            parallel = 10,
 #                                            SAN.nsteps = 2e8),
 #                    verbose = TRUE)
+

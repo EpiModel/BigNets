@@ -1,3 +1,9 @@
+library/
+local/
+cellar/
+lock/
+python/
+staging/
 # History files
 .Rhistory
 .Rapp.history
@@ -41,3 +47,4 @@ vignettes/*.pdf
 
 # Data
 data/
+workflows/
