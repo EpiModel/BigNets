@@ -3,18 +3,15 @@
 ##
 
 # Required variables:
-#   - `ncores`
+#   - ncores
+#   - NETSIZE
 
-# Setup ------------------------------------------------------------------------
-suppressMessages({
-  library(methods)
-  library(EpiModelHIV)
-  library(ARTnet)
-})
+## Packages ##
+library("methods")
+suppressMessages(library("EpiModelHIV"))
+suppressMessages(library("EpiModelHPC"))
+suppressMessages(library("ARTnet"))
 
-if (!dir.exists("data/input/")) {
-  dir.create("data/input/", recursive = TRUE)
-}
 
 # 0. Initialize Network --------------------------------------------------------
 
@@ -35,9 +32,10 @@ netstats <- build_netstats(
   epistats,
   netparams,
   expect.mort = 0.000478213,
-  network.size = 1e4
+  network.size = NETSIZE
 )
-saveRDS(netstats, file = "data/input/netstats.rds")
+saveRDS(netstats, file = paste0("data/input/netstats-",
+                                netstats$demog$num, ".rds"))
 
 num <- netstats$demog$num
 nw <- EpiModel::network_initialize(num, directed = FALSE)
@@ -92,7 +90,9 @@ fit_main <- netest(
 )
 fit_main$fit$newnetworks <- NULL
 
-# 2. Casual Model --------------------------------------------------------------
+
+# 2. Casual Model ---------------------------------------------------------
+
 
 # Formula
 model_casl <- ~ edges +
@@ -183,4 +183,24 @@ fit_inst$fit$newnetworks <- NULL
 # 4. Save Data -----------------------------------------------------------------
 
 out <- list(fit_main = fit_main, fit_casl = fit_casl, fit_inst = fit_inst)
-saveRDS(out, file = "data/input/netest.rds")
+saveRDS(out, file = paste0("data/input/netest-",
+                           netstats$demog$num, ".rds"))
+
+
+# Extra Control Args ------------------------------------------------------
+
+# fit_main <- netest(nw_main,
+#                    formation = model_main,
+#                    target.stats = netstats_main,
+#                    coef.diss = netstats$main$diss.byage,
+#                    set.control.ergm = control.ergm(init.method = "MPLE",
+#                                            MCMLE.effectiveSize = NULL,
+#                                            MCMC.burnin = 1e6,
+#                                            MCMC.interval = 1e5,
+#                                            MCMC.samplesize = 10000,
+#                                            init.MPLE.samplesize = 2e8,
+#                                            MPLE.constraints.ignore = TRUE,
+#                                            parallel = 10,
+#                                            SAN.nsteps = 2e8),
+#                    verbose = TRUE)
+

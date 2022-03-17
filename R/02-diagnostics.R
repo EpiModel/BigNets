@@ -3,16 +3,19 @@
 ##
 
 # Required variables:
-#   - `ncores`
-#   - `nsims`
-#   - `nsteps`
+#   - ncores
+#   - nsims
+#   - nsteps
+#   - NETSIZE
 
 # Setup ------------------------------------------------------------------------
 suppressMessages({
   library(EpiModelHIV)
 })
 
-est <- readRDS("data/input/netest.rds")
+fn <- paste0("data/input/netest-", NETSIZE, ".rds")
+est <- readRDS(fn)
+
 
 # Main -------------------------------------------------------------------------
 
@@ -89,4 +92,5 @@ dx <- list(dx_main = dx_main, dx_main_static = dx_main_static,
            dx_casl = dx_casl, dx_casl_static = dx_casl_static,
            dx_inst = dx_inst)
 
-saveRDS(dx, file = "data/input/netdx.rds")
+fn <- fn <- paste0("data/input/netdx-", NETSIZE, ".rds")
+saveRDS(dx, file = fn)
