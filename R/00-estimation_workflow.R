@@ -53,7 +53,7 @@ wf <- add_workflow_step(
     args = list(
       ncores = 30,
       nsims = 100,
-      nsteps = 1e3
+      nsteps = 1000
     ),
     setup_lines = hpc_configs$r_loader
   ),
