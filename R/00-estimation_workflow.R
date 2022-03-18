@@ -4,9 +4,10 @@
 
 # Setup ------------------------------------------------------------------------
 library(slurmworkflow)
+library(EpiModelHPC)
 
-# hpc_configs <- EpiModelHPC::swf_configs_hyak(hpc = "mox", partition = "csde")
-hpc_configs <- EpiModelHPC::swf_configs_rsph(partition = "epimodel")
+# hpc_configs <- swf_configs_hyak(hpc = "mox", partition = "csde")
+hpc_configs <- swf_configs_rsph(partition = "epimodel")
 max_cores <- 32
 
 # Workflow creation ------------------------------------------------------------
@@ -22,7 +23,10 @@ wf <- create_workflow(
 #   renv::restore()
 wf <- add_workflow_step(
   wf_summary = wf,
-  step_tmpl = step_tmpl_renv_restore(setup_lines = hpc_configs$r_loader),
+  step_tmpl = step_tmpl_renv_restore(
+    git_branch = "swf_dev",
+    setup_lines = hpc_configs$r_loader
+  ),
   sbatch_opts = hpc_configs$renv_sbatch_opts
 )
 
