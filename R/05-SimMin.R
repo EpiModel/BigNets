@@ -1,6 +1,6 @@
 
 ##
-## 03. Epidemic Model Burnin, Stage 1, Parameter Calibration
+## 05. Minimal epidemic simulation for testing and parameter exploration
 ##
 
 

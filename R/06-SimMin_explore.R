@@ -1,5 +1,7 @@
 
-## 04 Sim Min Exploratory Analysis
+##
+## 06. Interactive SimMin Analysis
+##
 
 library("EpiModelHIV")
 library("EpiModelHPC")
