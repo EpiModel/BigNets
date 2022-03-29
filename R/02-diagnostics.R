@@ -19,7 +19,7 @@ est <- readRDS(fn)
 
 # Main -------------------------------------------------------------------------
 
-fit_main <- est[[1]]
+fit_main <- est[["fit_main"]]
 
 model_main_dx <- ~edges +
   nodematch("age.grp", diff = TRUE) +
@@ -45,7 +45,7 @@ dx_main_static <- EpiModel::netdx(
 
 # Casual -----------------------------------------------------------------------
 
-fit_casl <- est[[2]]
+fit_casl <- est[["fit_casl"]]
 
 model_casl_dx <- ~edges +
   nodematch("age.grp", diff = TRUE) +
@@ -71,7 +71,7 @@ dx_casl_static <- netdx(
 
 # One-Off ----------------------------------------------------------------------
 
-fit_inst <- est[[3]]
+fit_inst <- est[["fit_inst"]]
 
 model_inst_dx <- ~edges +
   nodematch("age.grp", diff = FALSE) +

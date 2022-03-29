@@ -6,7 +6,7 @@
 
 # Setup ------------------------------------------------------------------------
 suppressMessages({
-  library(EpiModelHIV)
+  library("EpiModelHIV")
 })
 
 netstats <- readRDS("data/input/netstats.rds")
