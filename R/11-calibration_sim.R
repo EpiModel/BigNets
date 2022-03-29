@@ -9,8 +9,8 @@
 
 # Setup ------------------------------------------------------------------------
 suppressMessages({
-  library(EpiModelHIV)
-  library(EpiModelHPC)
+  library("EpiModelHIV")
+  library("EpiModelHPC")
 })
 
 output_dir <- "data/output/calib"

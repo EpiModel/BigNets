@@ -3,8 +3,8 @@
 ##
 
 # Setup ------------------------------------------------------------------------
-library(slurmworkflow)
-library(EpiModelHPC)
+library("slurmworkflow")
+library("EpiModelHPC")
 
 # hpc_configs <- swf_configs_hyak(hpc = "mox", partition = "csde")
 hpc_configs <- swf_configs_rsph(partition = "preemptable")

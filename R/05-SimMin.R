@@ -1,6 +1,6 @@
 
 ##
-## 05. Minimal epidemic simulation for testing and parameter exploration
+## 05. Medium-level epidemic simulation for testing and parameter exploration
 ##
 
 
@@ -35,8 +35,6 @@ control <- control_msm(simno = fsimno,
                        nsteps = 52 * 60,
                        nsims = ncores,
                        ncores = ncores,
-                       cumulative.edgelist = TRUE,
-                       truncate.el.cuml = 0,
                        verbose = TRUE,
                        verbose.int = 250,
                        verbose.FUN = verbose.hpc.net)

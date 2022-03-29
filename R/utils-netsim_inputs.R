@@ -4,8 +4,8 @@
 
 # Setup ------------------------------------------------------------------------
 suppressMessages({
-  library(EpiModelHIV)
-  library(EpiModelHPC)
+  library("EpiModelHIV")
+  library("EpiModelHPC")
 })
 
 epistats <- readRDS("data/input/epistats.rds")

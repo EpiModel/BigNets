@@ -8,8 +8,8 @@
 
 # Setup ------------------------------------------------------------------------
 suppressMessages({
-  library(EpiModelHIV)
-  library(future.apply)
+  library("EpiModelHIV")
+  library("future.apply")
 })
 
 
