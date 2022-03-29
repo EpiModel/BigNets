@@ -81,12 +81,12 @@
       "Version": "2.0.5",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
-      "RemoteRef": "HEAD",
+      "RemoteRef": "main",
       "RemoteSha": "854e6ed9addcbbdcdb66be00d43356a532f9efca",
-      "RemoteHost": "api.github.com",
-      "Hash": "45ce9ba760de966d467605c446fac266",
+      "Hash": "395a51d0bff36b71e554dfb61a50d3a3",
       "Requirements": [
         "EpiModel",
         "ergm",
@@ -102,34 +102,37 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "epimodel",
-      "RemoteRepo": "epimodelhpc",
-      "RemoteRef": "load_git",
-      "RemoteSha": "499f5e990063a9a8c447a096b1b2f4228b8314b6",
-      "Hash": "db167ce2c0020b2a4ec2581d912f6e29",
+      "RemoteUsername": "EpiModel",
+      "RemoteRepo": "EpiModelHPC",
+      "RemoteRef": "main",
+      "RemoteSha": "9f414129ebd07366e390d6d114826aac56d19af8",
+      "Remotes": "EpiModel/slurmworkflow",
+      "Hash": "4716fe9ca494415516bac80b81714994",
       "Requirements": [
         "EpiModel",
         "doParallel",
         "ergm",
         "foreach",
+        "remotes",
+        "slurmworkflow",
         "stringr",
         "tergm"
       ]
     },
     "MASS": {
       "Package": "MASS",
-      "Version": "7.3-55",
+      "Version": "7.3-56",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "c5232ffb549f6d7a04a152c34ca1353d",
+      "Hash": "af0e1955cb80bb36b7988cc657db261e",
       "Requirements": []
     },
     "Matrix": {
       "Package": "Matrix",
-      "Version": "1.4-0",
+      "Version": "1.4-1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "130c0caba175739d98f2963c6a407cf6",
+      "Hash": "699c47c606293bdfbc9fd78a93c9c8fe",
       "Requirements": [
         "lattice"
       ]
@@ -219,10 +222,10 @@
     },
     "crayon": {
       "Package": "crayon",
-      "Version": "1.5.0",
+      "Version": "1.5.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "741c2e098e98afe3dc26a7b0e5489f4e",
+      "Hash": "8dc45fd8a1ee067a92b85ef274e66d6a",
       "Requirements": []
     },
     "deSolve": {
@@ -305,10 +308,10 @@
     },
     "fansi": {
       "Package": "fansi",
-      "Version": "1.0.2",
+      "Version": "1.0.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "f28149c2d7a1342a834b314e95e67260",
+      "Hash": "83a8afdbe71839506baa9f90eebad7ec",
       "Requirements": []
     },
     "farver": {
@@ -555,10 +558,10 @@
     },
     "nlme": {
       "Package": "nlme",
-      "Version": "3.1-155",
+      "Version": "3.1-157",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "74ad940dccc9e977189a5afe5fcdb7ba",
+      "Hash": "dbca60742be0c9eddc5205e5c7ca1f44",
       "Requirements": [
         "lattice"
       ]
@@ -672,11 +675,11 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "epimodel",
+      "RemoteUsername": "EpiModel",
       "RemoteRepo": "slurmworkflow",
-      "RemoteRef": "remove_renv_restore",
-      "RemoteSha": "2f098f7c4ce349342bdba53a1562ffbe964f8bef",
-      "Hash": "70dca79d59d9a0eb03be7628c7590dd7",
+      "RemoteRef": "main",
+      "RemoteSha": "33702bbcd6847218f9c7ee71e500e452f99e4f8b",
+      "Hash": "828f53eca4783e1621e6c4008ff1d9fe",
       "Requirements": [
         "fs",
         "yaml"
