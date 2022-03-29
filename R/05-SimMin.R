@@ -3,21 +3,21 @@
 ## 05. Medium-level epidemic simulation for testing and parameter exploration
 ##
 
+# Required variables:
+#   - NETSIZE
+#   - nsims
+#   - ncores
 
 ## Packages
-library("methods")
-suppressMessages(library("EpiModelHIV"))
-suppressMessages(library("EpiModelHPC"))
-
-## Environmental Arguments
-pull_env_vars(num.vars = "NETSIZE")
-
-netsize.fn <- paste0(NETSIZE, "k.rds")
+suppressMessages({
+  library("EpiModelHIV")
+  library("EpiModelHPC")
+})
 
 ## Parameters
 epistats <- readRDS("data/input/epistats.rds")
-netstats <- readRDS(paste0("data/input/netstats-", netsize.fn))
-est <- readRDS(paste0("data/input/netest-", netsize.fn))
+netstats <- readRDS(paste0("data/input/netstats-", NETSIZE, ".rds"))
+est <- readRDS(paste0("data/input/netest-", NETSIZE, ".rds"))
 
 param <- param_msm(netstats = netstats,
                    epistats = epistats,
@@ -31,8 +31,7 @@ param <- param_msm(netstats = netstats,
                    prep.start = (52 * 60) + 1,
                    prep.start.prob = 0.66)
 init <- init_msm()
-control <- control_msm(simno = fsimno,
-                       nsteps = 52 * 60,
+control <- control_msm(nsteps = 52 * 60,
                        nsims = ncores,
                        ncores = ncores,
                        verbose = TRUE,

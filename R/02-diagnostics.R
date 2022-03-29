@@ -10,7 +10,7 @@
 
 # Setup ------------------------------------------------------------------------
 suppressMessages({
-  library(EpiModelHIV)
+  library("EpiModelHIV")
 })
 
 fn <- paste0("data/input/netest-", NETSIZE, ".rds")
