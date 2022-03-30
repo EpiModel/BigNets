@@ -58,9 +58,9 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_do_call_script(
     r_script = "R/02-diagnostics.R",
     args = list(
-      ncores = 30,
-      nsims = 100,
-      nsteps = 1000,
+      ncores = 10,
+      nsims = 50,
+      nsteps = 500,
       NETSIZE = 102000
     ),
     setup_lines = hpc_configs$r_loader
@@ -74,7 +74,7 @@ wf <- add_workflow_step(
 )
 
 # to send the workflows on the HPC
-# scp -r workflows/estimation sph:/projects/epimodel/sjenness/BigNets/workflows/estimation
+# scp -r ~/git/BigNets/workflows/estimation sph:/projects/epimodel/sjenness/BigNets/workflows/estimation
 # from the BigNets folder on Mox: workflows/estimation/start_workflow.sh
 
 # to get the data back
