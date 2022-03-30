@@ -43,6 +43,11 @@ dx_main_static <- EpiModel::netdx(
   nwstats.formula = model_main_dx, skip.dissolution = TRUE,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
 
+dx <- list(dx_main = dx_main, dx_main_static = dx_main_static)
+fn <- paste0("data/input/netdx-main-", NETSIZE, ".rds")
+saveRDS(dx, file = fn)
+rm(dx, dx_main, dx_main_static)
+
 # Casual -----------------------------------------------------------------------
 
 fit_casl <- est[["fit_casl"]]
@@ -69,6 +74,11 @@ dx_casl_static <- netdx(
   nwstats.formula = model_casl_dx, skip.dissolution = TRUE,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
 
+dx <- list(dx_casl = dx_casl, dx_casl_static = dx_casl_static)
+fn <- paste0("data/input/netdx-casl-", NETSIZE, ".rds")
+saveRDS(dx, file = fn)
+rm(dx, dx_casl, dx_casl_static)
+
 # One-Off ----------------------------------------------------------------------
 
 fit_inst <- est[["fit_inst"]]
@@ -88,9 +98,13 @@ dx_inst <- netdx(
   nwstats.formula = model_inst_dx,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
 
-dx <- list(dx_main = dx_main, dx_main_static = dx_main_static,
-           dx_casl = dx_casl, dx_casl_static = dx_casl_static,
-           dx_inst = dx_inst)
-
-fn <- fn <- paste0("data/input/netdx-", NETSIZE, ".rds")
+dx <- list(dx_inst = dx_inst)
+fn <- paste0("data/input/netdx-inst-", NETSIZE, ".rds")
 saveRDS(dx, file = fn)
+
+# dx <- list(dx_main = dx_main, dx_main_static = dx_main_static,
+#            dx_casl = dx_casl, dx_casl_static = dx_casl_static,
+#            dx_inst = dx_inst)
+#
+# fn <- fn <- paste0("data/input/netdx-", NETSIZE, ".rds")
+# saveRDS(dx, file = fn)
