@@ -3,19 +3,18 @@
 ## 04. Small-scale epidemic simulation for testing/debugging
 ##
 
-# Required variables:
-#   - NETSIZE
-
 ## Packages
 suppressMessages(library("EpiModelHIV"))
 suppressMessages(library("EpiModelHPC"))
 
-NETSIZE <- 10000
+# Load the `NETSIZE` value and the formatted `netsize_string`
+# NETSIZE <- 1e4     # to override (before sourcing the file)
+source("R/utils-netsize.R")
 
 ## Parameters
 epistats <- readRDS("data/input/epistats.rds")
-netstats <- readRDS(paste0("data/input/netstats-", NETSIZE, ".rds"))
-est <- readRDS(paste0("data/input/netest-", NETSIZE, ".rds"))
+netstats <- readRDS(paste0("data/input/netstats-", netsize_string, ".rds"))
+est <- readRDS(paste0("data/input/netest-", netsize_string, ".rds"))
 
 param <- param_msm(
   netstats = netstats,

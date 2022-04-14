@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.1.2",
+    "Version": "4.1.3",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -52,12 +52,13 @@
       "Version": "2.2.2",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteUsername": "EpiModel",
-      "RemoteRepo": "EpiModel",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "55c171eb8f9daa284851dd6c6d3b0010777710fd",
       "RemoteHost": "api.github.com",
-      "Hash": "2aa8b2dfa992ba7544ac549a76a905d5",
+      "RemoteUsername": "epimodel",
+      "RemoteRepo": "epimodel",
+      "RemoteRef": "main",
+      "RemoteSha": "8a48f97c7702c5126a8cddeb4e7b6aad53c150ee",
+      "Remotes": "github::statnet/statnet.common@master, github::statnet/network@master,\n    github::statnet/networkDynamic@master, github::statnet/ergm@master,\n    github::statnet/tergm@master",
+      "Hash": "00ca82ad7765d07775af12e2a9e13311",
       "Requirements": [
         "RColorBrewer",
         "Rcpp",
@@ -84,9 +85,9 @@
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "EpiModelHIV-p",
       "RemoteRef": "main",
-      "RemoteSha": "4a98b40c77c3ecbb651475eacde97f230e02eacc",
+      "RemoteSha": "997b6b08d9a155765aaf56679541dfa4ccb56408",
       "RemoteHost": "api.github.com",
-      "Hash": "96c49480f0977afdcdf5d56e4a6ef564",
+      "Hash": "2a5f6908ed34d3990b9aee544e888ee0",
       "Requirements": [
         "EpiModel",
         "ergm",
@@ -107,7 +108,7 @@
       "RemoteSha": "f0c0dc6ab0c4ea8db7f8708e7bdd94a41cb9120f",
       "RemoteHost": "api.github.com",
       "Remotes": "EpiModel/slurmworkflow",
-      "Hash": "dd8f2b518c2c255fc8ac8c701bfa6004",
+      "Hash": "1ef1236709841cf1f9d7afec3ec4bd87",
       "Requirements": [
         "EpiModel",
         "doParallel",
@@ -320,15 +321,24 @@
     },
     "ergm": {
       "Package": "ergm",
-      "Version": "4.1.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "6010266226f21ade9e51f381f83b967d",
+      "Version": "4.2-6873",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "statnet",
+      "RemoteRepo": "ergm",
+      "RemoteRef": "master",
+      "RemoteSha": "3dc0f151f51face675cbfb128f6a63dcae5e245e",
+      "Remotes": "github::statnet/statnet.common@master, github::statnet/tergm@master,\n    github::statnet/ergm.count@master",
+      "Hash": "aea987fcfded16cc7a438e410ed17f5e",
       "Requirements": [
         "MASS",
         "Matrix",
         "coda",
+        "digest",
+        "knitr",
         "lpSolveAPI",
+        "magrittr",
         "memoise",
         "network",
         "purrr",
@@ -336,6 +346,7 @@
         "rle",
         "robustbase",
         "statnet.common",
+        "stringr",
         "tibble",
         "trust"
       ]
@@ -632,10 +643,15 @@
     },
     "network": {
       "Package": "network",
-      "Version": "1.17.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "a3a94709afe998d2745847ce69c6c5d9",
+      "Version": "1.17.1-685",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "statnet",
+      "RemoteRepo": "network",
+      "RemoteRef": "master",
+      "RemoteSha": "92f4fcfe3477a910e6b42eb4e8c61619e9144776",
+      "Hash": "ee34885b7fe4aea9f5788dfe3c49b7b4",
       "Requirements": [
         "magrittr",
         "statnet.common",
@@ -644,10 +660,16 @@
     },
     "networkDynamic": {
       "Package": "networkDynamic",
-      "Version": "0.11.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "c2908fd6ef01421514faab838ecef998",
+      "Version": "0.11.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "statnet",
+      "RemoteRepo": "networkDynamic",
+      "RemoteRef": "master",
+      "RemoteSha": "66e66b91418ae6bf55b065d20f92115416cc448e",
+      "Remotes": "github::statnet/network@master",
+      "Hash": "f29c7c51c88fbf302be400be62c38683",
       "Requirements": [
         "network",
         "statnet.common"
@@ -665,10 +687,10 @@
     },
     "parallelly": {
       "Package": "parallelly",
-      "Version": "1.30.0",
+      "Version": "1.31.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "67db13907a9cea89c118cf82d448799f",
+      "Hash": "ceef6586b2539fd15f4cdf87061bfa04",
       "Requirements": []
     },
     "pillar": {
@@ -825,10 +847,10 @@
     },
     "scales": {
       "Package": "scales",
-      "Version": "1.1.1",
+      "Version": "1.2.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "6f76f71042411426ec8df6c54f34e6dd",
+      "Hash": "6e8750cdd13477aa440d453da93d5cac",
       "Requirements": [
         "R6",
         "RColorBrewer",
@@ -836,6 +858,7 @@
         "labeling",
         "lifecycle",
         "munsell",
+        "rlang",
         "viridisLite"
       ]
     },
@@ -844,11 +867,11 @@
       "Version": "0.0.0.9000",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "EpiModel",
       "RemoteRepo": "slurmworkflow",
       "RemoteRef": "main",
       "RemoteSha": "33702bbcd6847218f9c7ee71e500e452f99e4f8b",
+      "RemoteHost": "api.github.com",
       "Hash": "828f53eca4783e1621e6c4008ff1d9fe",
       "Requirements": [
         "fs",
@@ -857,10 +880,15 @@
     },
     "statnet.common": {
       "Package": "statnet.common",
-      "Version": "4.5.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "caf9dc2f33cc6ea4b1930cd71ee29d10",
+      "Version": "4.6.0-381",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "statnet",
+      "RemoteRepo": "statnet.common",
+      "RemoteRef": "master",
+      "RemoteSha": "38bf804be5644051cb589143d209ab9844bde64c",
+      "Hash": "b565acd86995bbf60881a680e034a778",
       "Requirements": [
         "coda"
       ]
@@ -887,10 +915,16 @@
     },
     "tergm": {
       "Package": "tergm",
-      "Version": "4.0.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "71e0ee3f1bb2851382d9606e3b1aa8a6",
+      "Version": "4.0-2391",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "statnet",
+      "RemoteRepo": "tergm",
+      "RemoteRef": "master",
+      "RemoteSha": "2559a193218250657de6b542c72b8b6ef5b072c8",
+      "Remotes": "github::statnet/statnet.common@master, github::statnet/network@master,\n    github::statnet/networkDynamic@master, github::statnet/ergm@master",
+      "Hash": "209c2e4ce7993896b31af721fb588374",
       "Requirements": [
         "MASS",
         "coda",
@@ -962,10 +996,10 @@
     },
     "vctrs": {
       "Package": "vctrs",
-      "Version": "0.4.0",
+      "Version": "0.4.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "95c2573b232eac82df562f9e300f9790",
+      "Hash": "8b54f22e2a58c4f275479c92ce041a57",
       "Requirements": [
         "cli",
         "glue",

@@ -4,7 +4,6 @@
 
 # Required variables:
 #   - ncores
-#   - NETSIZE
 
 ## Packages ##
 library("methods")
@@ -12,14 +11,19 @@ suppressMessages(library("EpiModelHIV"))
 suppressMessages(library("EpiModelHPC"))
 suppressMessages(library("ARTnet"))
 
+# Load the `NETSIZE` value and the formatted `netsize_string`
+# NETSIZE <- 1e4 # to override (before sourcing the file)
+source("R/utils-netsize.R")
 
 # 0. Initialize Network --------------------------------------------------------
+
 
 epistats <- build_epistats(
   geog.lvl = "city",
   geog.cat = "Atlanta",
   init.hiv.prev = c(0.33, 0.137, 0.084),
-  race = TRUE
+  race = TRUE,
+  time.unit = 7
 )
 saveRDS(epistats, file = "data/input/epistats.rds")
 
@@ -34,8 +38,7 @@ netstats <- build_netstats(
   expect.mort = 0.000478213,
   network.size = NETSIZE
 )
-saveRDS(netstats, file = paste0("data/input/netstats-",
-                                netstats$demog$num, ".rds"))
+saveRDS(netstats, file = paste0("data/input/netstats-", netsize_string, ".rds"))
 
 num <- netstats$demog$num
 nw <- EpiModel::network_initialize(num, directed = FALSE)
@@ -88,11 +91,9 @@ fit_main <- netest(
   ),
   verbose = FALSE
 )
-fit_main$fit$newnetworks <- NULL
-
+fit_main <- trim_netest(fit_main)
 
 # 2. Casual Model ---------------------------------------------------------
-
 
 # Formula
 model_casl <- ~ edges +
@@ -135,7 +136,7 @@ fit_casl <- netest(
   ),
   verbose = FALSE
 )
-fit_casl$fit$newnetworks <- NULL
+fit_casl <- trim_netest(fit_casl)
 
 # 3. One-Off Model -------------------------------------------------------------
 
@@ -178,13 +179,12 @@ fit_inst <- netest(
   ),
   verbose = FALSE
 )
-fit_inst$fit$newnetworks <- NULL
+fit_inst <- trim_netest(fit_inst)
 
 # 4. Save Data -----------------------------------------------------------------
 
 out <- list(fit_main = fit_main, fit_casl = fit_casl, fit_inst = fit_inst)
-saveRDS(out, file = paste0("data/input/netest-",
-                           netstats$demog$num, ".rds"))
+saveRDS(out, file = paste0("data/input/netest-", netsize_string, ".rds"))
 
 
 # Extra Control Args ------------------------------------------------------

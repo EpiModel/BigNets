@@ -12,7 +12,6 @@ suppressMessages({
   library("future.apply")
 })
 
-
 future::plan(future::multicore, workers = ncores)
 calib_dir <- "data/output/calib"
 

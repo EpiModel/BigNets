@@ -15,9 +15,15 @@ suppressMessages({
 })
 
 ## Parameters
+# Load the shared variables required for this run of the project
+source("R/utils-netsize.R")
+## To override the valu of NETSIZE in "shared_vars.R"
+# NETSIZE <- 102000
+# netsize_string <- format(NETSIZE, scientific = FALSE)
+
 epistats <- readRDS("data/input/epistats.rds")
-netstats <- readRDS(paste0("data/input/netstats-", NETSIZE, ".rds"))
-est <- readRDS(paste0("data/input/netest-", NETSIZE, ".rds"))
+netstats <- readRDS(paste0("data/input/netstats-", netsize_string, ".rds"))
+est <- readRDS(paste0("data/input/netest-", netsize_string, ".rds"))
 
 param <- param_msm(netstats = netstats,
                    epistats = epistats,

@@ -5,6 +5,8 @@
 # Setup ------------------------------------------------------------------------
 library("slurmworkflow")
 library("EpiModelHPC")
+# Load the `NETSIZE` value and the formatted `netsize_string`
+source("R/utils-netsize.R")
 
 # hpc_configs <- swf_configs_hyak(hpc = "mox", partition = "csde")
 hpc_configs <- swf_configs_rsph(partition = "epimodel")
@@ -40,8 +42,7 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_do_call_script(
     r_script = "R/01-estimation.R",
     args = list(
-      ncores = max_cores,
-      NETSIZE = 102000
+      ncores = max_cores
     ),
     setup_lines = hpc_configs$r_loader
   ),
@@ -60,8 +61,7 @@ wf <- add_workflow_step(
     args = list(
       ncores = 10,
       nsims = 50,
-      nsteps = 500,
-      NETSIZE = 102000
+      nsteps = 500
     ),
     setup_lines = hpc_configs$r_loader
   ),

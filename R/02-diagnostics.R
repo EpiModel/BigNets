@@ -6,16 +6,18 @@
 #   - ncores
 #   - nsims
 #   - nsteps
-#   - NETSIZE
 
 # Setup ------------------------------------------------------------------------
 suppressMessages({
   library("EpiModelHIV")
 })
 
-fn <- paste0("data/input/netest-", NETSIZE, ".rds")
-est <- readRDS(fn)
+# Load the `NETSIZE` value and the formatted `netsize_string`
+# NETSIZE <- 1e4 # to override (before sourcing the file)
+source("R/utils-netsize.R")
 
+fn <- paste0("data/input/netest-", netsize_string, ".rds")
+est <- readRDS(fn)
 
 # Main -------------------------------------------------------------------------
 
@@ -36,7 +38,7 @@ dx_main <- netdx(
   fit_main, nsims = nsims, ncores = ncores, nsteps = nsteps,
   nwstats.formula = model_main_dx, skip.dissolution = TRUE,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5),
-  set.control.stergm = control.simulate.network(MCMC.burnin.min = 2e5))
+  set.control.tergm = control.simulate.formula.tergm(MCMC.burnin.min = 2e5))
 
 dx_main_static <- EpiModel::netdx(
   fit_main, dynamic = FALSE, nsims = 10000,
@@ -44,7 +46,7 @@ dx_main_static <- EpiModel::netdx(
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
 
 dx <- list(dx_main = dx_main, dx_main_static = dx_main_static)
-fn <- paste0("data/input/netdx-main-", NETSIZE, ".rds")
+fn <- paste0("data/input/netdx-main-", netsize_string, ".rds")
 saveRDS(dx, file = fn)
 rm(dx, dx_main, dx_main_static)
 
@@ -75,7 +77,7 @@ dx_casl_static <- netdx(
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
 
 dx <- list(dx_casl = dx_casl, dx_casl_static = dx_casl_static)
-fn <- paste0("data/input/netdx-casl-", NETSIZE, ".rds")
+fn <- paste0("data/input/netdx-casl-", netsize_string, ".rds")
 saveRDS(dx, file = fn)
 rm(dx, dx_casl, dx_casl_static)
 
@@ -99,12 +101,12 @@ dx_inst <- netdx(
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
 
 dx <- list(dx_inst = dx_inst)
-fn <- paste0("data/input/netdx-inst-", NETSIZE, ".rds")
+fn <- paste0("data/input/netdx-inst-", netsize_string, ".rds")
 saveRDS(dx, file = fn)
 
 # dx <- list(dx_main = dx_main, dx_main_static = dx_main_static,
 #            dx_casl = dx_casl, dx_casl_static = dx_casl_static,
 #            dx_inst = dx_inst)
 #
-# fn <- fn <- paste0("data/input/netdx-", NETSIZE, ".rds")
+# fn <- fn <- paste0("data/input/netdx-", netsize_string, ".rds")
 # saveRDS(dx, file = fn)
