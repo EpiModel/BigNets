@@ -5,8 +5,7 @@
 # Setup ------------------------------------------------------------------------
 library("slurmworkflow")
 library("EpiModelHPC")
-# Load the `NETSIZE` value and the formatted `netsize_string`
-source("R/utils-netsize.R")
+# The size of network to be used is defined in "R/utils-netsize.R"
 
 # hpc_configs <- swf_configs_hyak(hpc = "mox", partition = "csde")
 hpc_configs <- swf_configs_rsph(partition = "epimodel")
