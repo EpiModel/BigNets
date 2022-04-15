@@ -253,10 +253,10 @@
     },
     "deSolve": {
       "Package": "deSolve",
-      "Version": "1.31",
+      "Version": "1.32",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "87777d63d4989c444fd0f7e9b67daf03",
+      "Hash": "202c6c0bc065f8bf5d1fb53df694b73f",
       "Requirements": []
     },
     "desc": {
