@@ -13,6 +13,10 @@ suppressMessages({
   library("EpiModelHPC")
 })
 
+# Load the `NETSIZE` value and the formatted `netsize_string`
+# NETSIZE <- 1e4 # to override (before sourcing the file)
+source("R/utils-netsize.R")
+
 output_dir <- "data/output/calib"
 if (!dir.exists(output_dir)) {
   dir.create(output_dir, recursive = TRUE)
