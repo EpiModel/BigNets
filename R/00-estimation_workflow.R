@@ -9,7 +9,7 @@ library("EpiModelHPC")
 
 # hpc_configs <- swf_configs_hyak(hpc = "mox", partition = "csde")
 hpc_configs <- swf_configs_rsph(partition = "epimodel")
-max_cores <- 32
+max_cores <- 10
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
