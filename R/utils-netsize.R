@@ -7,7 +7,7 @@
 
 # Size of network to use
 if (! exists("NETSIZE")) {
-  NETSIZE <- 50 * 1e3
+  NETSIZE <- 102 * 1e3
 }
 
 netsize_string <- format(NETSIZE, scientific = FALSE)
