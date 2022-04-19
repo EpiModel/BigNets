@@ -29,7 +29,7 @@ wf <- add_workflow_step(
 # Run the simulations ----------------------------------------------------------
 n_batches <- 10
 scenarios.df <- read.csv("data/input/calib_scenarios.csv")
-scenarios.list <- EpiModel::make_scenarios_list(scenarios.df)
+scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
 scenarios.list <- rep(scenarios.list, n_batches)
 
 # for this template, the syntax is similar to `base::Map` and `mapply`
