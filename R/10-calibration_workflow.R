@@ -20,7 +20,7 @@ wf <- create_workflow(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_renv_restore(
-    git_branch = "swf_dev",
+    git_branch = "main",
     setup_lines = hpc_configs$r_loader
   ),
   sbatch_opts = hpc_configs$renv_sbatch_opts
