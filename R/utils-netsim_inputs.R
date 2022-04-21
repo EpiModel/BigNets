@@ -37,7 +37,7 @@ param <- param_msm(
   hiv.trans.scale = c(2.44, 0.424, 0.270),
   riskh.start = prep_start - 53,
   prep.start = prep_start,
-  prep.start.prob = 0.66
+  prep.start.prob = rep(0.66, 3)
 )
 
 # Initial conditions -----------------------------------------------------------
