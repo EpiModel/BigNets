@@ -35,15 +35,24 @@ model_main_dx <- ~edges +
   degree(0:3)
 
 dx_main <- netdx(
-  fit_main, nsims = nsims, ncores = ncores, nsteps = nsteps,
-  nwstats.formula = model_main_dx, skip.dissolution = TRUE,
+  fit_main,
+  nsims = nsims,
+  ncores = ncores,
+  nsteps = nsteps,
+  nwstats.formula = model_main_dx,
+  skip.dissolution = TRUE,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5),
-  set.control.tergm = control.simulate.formula.tergm(MCMC.burnin.min = 2e5))
+  set.control.tergm = control.simulate.formula.tergm(MCMC.burnin.min = 2e5)
+)
 
 dx_main_static <- EpiModel::netdx(
-  fit_main, dynamic = FALSE, nsims = 10000,
-  nwstats.formula = model_main_dx, skip.dissolution = TRUE,
-  set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
+  fit_main,
+  dynamic = FALSE,
+  nsims = 10000,
+  nwstats.formula = model_main_dx,
+  skip.dissolution = TRUE,
+  set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5)
+)
 
 dx <- list(dx_main = dx_main, dx_main_static = dx_main_static)
 fn <- paste0("data/input/netdx-main-", netsize_string, ".rds")
@@ -66,15 +75,24 @@ model_casl_dx <- ~edges +
   degree(0:4)
 
 dx_casl <- netdx(
-  fit_casl, nsims = nsims, ncores = ncores, nsteps = nsteps,
-  nwstats.formula = model_casl_dx, skip.dissolution = TRUE,
+  fit_casl,
+  nsims = nsims,
+  ncores = ncores,
+  nsteps = nsteps,
+  nwstats.formula = model_casl_dx,
+  skip.dissolution = TRUE,
   set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5),
-  set.control.stergm = control.simulate.network(MCMC.burnin.min = 2e5))
+  set.control.tergm = control.simulate.formula.tergm(MCMC.burnin.min = 2e5)
+)
 
 dx_casl_static <- netdx(
-  fit_casl, dynamic = FALSE, nsims = 10000,
-  nwstats.formula = model_casl_dx, skip.dissolution = TRUE,
-  set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
+  fit_casl,
+  dynamic = FALSE,
+  nsims = 10000,
+  nwstats.formula = model_casl_dx,
+  skip.dissolution = TRUE,
+  set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5)
+)
 
 dx <- list(dx_casl = dx_casl, dx_casl_static = dx_casl_static)
 fn <- paste0("data/input/netdx-casl-", netsize_string, ".rds")
@@ -96,17 +114,13 @@ model_inst_dx <- ~edges +
   degree(0:4)
 
 dx_inst <- netdx(
-  fit_inst, nsims = 10000, dynamic = FALSE,
+  fit_inst,
+  nsims = 10000,
+  dynamic = FALSE,
   nwstats.formula = model_inst_dx,
-  set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5))
+  set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5)
+)
 
 dx <- list(dx_inst = dx_inst)
 fn <- paste0("data/input/netdx-inst-", netsize_string, ".rds")
 saveRDS(dx, file = fn)
-
-# dx <- list(dx_main = dx_main, dx_main_static = dx_main_static,
-#            dx_casl = dx_casl, dx_casl_static = dx_casl_static,
-#            dx_inst = dx_inst)
-#
-# fn <- fn <- paste0("data/input/netdx-", netsize_string, ".rds")
-# saveRDS(dx, file = fn)
