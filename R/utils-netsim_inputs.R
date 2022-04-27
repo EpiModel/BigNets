@@ -32,8 +32,7 @@ param <- param.net(
   netstats = netstats,
   epistats = epistats,
   riskh.start = prep_start - 53,
-  prep.start = prep_start,
-  epi_trackers = list()
+  prep.start = prep_start
 )
 # param <- param_msm(
 #   netstats = netstats,

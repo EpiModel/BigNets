@@ -12,11 +12,11 @@ source("R/utils-netsim_inputs.R")
 source("R/utils-targets.R")
 
 control <- control_msm(
-  nsteps = 20,
+  nsteps = 10 * 52,
   nsims = 1,
   ncores = 1,
   cumulative.edgelist = TRUE,
-  truncate.el.cuml = 0,
+  truncate.el.cuml = Inf,
   verbose = TRUE,
   tracker.list = calibration_trackers
 )
@@ -44,4 +44,36 @@ rm(sim, d_sim)
 gc()
 d_p <- process_one_calibration(file_name, nsteps = 10)
 glimpse(d_p)
+
+# el_cuml ----------------------------------------------------------------------
+
+el_cuml_list <- sim$el.cuml$sim1
+el_cuml_df <- dplyr::bind_rows(el_cuml_list)
+el_sizes <- vapply(el_cuml_list, nrow, numeric(1))
+el_cuml_df[["network"]] <- rep(1:3, el_sizes)
+
+el_cuml_df %>%
+  group_by(network) %>%
+  summarise(n = n())
+
+concurent_el <- el_cuml_df %>%
+  group_by(head, tail) %>%
+  summarize(n = n()) %>%
+  ungroup() %>%
+  filter(n > 1) %>%
+  left_join(el_cuml_df, by = c("head", "tail")) %>%
+  mutate(stop = if_else(is.na(stop), Inf, stop)) %>%
+  arrange(head, tail, start, stop) %>%
+  group_by(head, tail) %>%
+  mutate(
+    concurent = start < lag(stop),
+    concurent = if_else(is.na(concurent), lead(concurent), concurent)
+  ) %>%
+  filter(concurent)
+
+nrow(concurent_el)
+print(concurent_el, n = 2000)
+
+
+
 
