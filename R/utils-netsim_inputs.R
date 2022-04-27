@@ -26,19 +26,28 @@ interv_start       <- prep_start + 52 * 5
 nsteps             <- interv_start + 52 * 10 - 1
 
 # Parameters -------------------------------------------------------------------
-param <- param_msm(
+df_params <- readr::read_csv("data/input/params.csv", )
+param <- param.net(
+  data.frame.params = df_params,
   netstats = netstats,
   epistats = epistats,
-  a.rate = 0.00049,
-  hiv.test.rate = c(0.00385, 0.00380, 0.00690),
-  tx.init.rate = c(0.1775, 0.190, 0.2521),
-  tx.halt.partial.rate = c(0.0062, 0.0055, 0.0031),
-  tx.reinit.partial.rate = c(0.00255, 0.00255, 0.00255),
-  hiv.trans.scale = c(2.44, 0.424, 0.270),
   riskh.start = prep_start - 53,
   prep.start = prep_start,
-  prep.start.prob = rep(0.66, 3)
+  epi_trackers = list()
 )
+# param <- param_msm(
+#   netstats = netstats,
+#   epistats = epistats,
+#   a.rate = 0.00049,
+#   hiv.test.rate = c(0.00385, 0.00380, 0.00690),
+#   tx.init.rate = c(0.1775, 0.190, 0.2521),
+#   tx.halt.partial.rate = c(0.0062, 0.0055, 0.0031),
+#   tx.reinit.partial.rate = c(0.00255, 0.00255, 0.00255),
+#   hiv.trans.scale = c(2.44, 0.424, 0.270),
+#   riskh.start = prep_start - 53,
+#   prep.start = prep_start,
+#   prep.start.prob = rep(0.66, 3)
+# )
 
 # Initial conditions -----------------------------------------------------------
 init <- init_msm()
