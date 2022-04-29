@@ -105,10 +105,10 @@
       "RemoteUsername": "epimodel",
       "RemoteRepo": "epimodelhpc",
       "RemoteRef": "step_tmpl_scenario",
-      "RemoteSha": "01986886b3114fdf336d399c5786c56255c2763e",
+      "RemoteSha": "82523c613fcd19f903b4bf258b67255328ebbf02",
       "RemoteHost": "api.github.com",
       "Remotes": "EpiModel/slurmworkflow",
-      "Hash": "c5788cabe94d22c0ed4ee33d5db1cd11",
+      "Hash": "3cb089a79dd9a46a8c18cd442f236894",
       "Requirements": [
         "EpiModel",
         "doParallel",
