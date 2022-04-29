@@ -55,7 +55,7 @@ wf <- add_workflow_step(
 #     "mem" = "0" # special: all mem on node
 #   )
 # )
-source("R/utils-nets.R")
+source("R/utils-netsize.R")
 source("R/utils-netsim_inputs.R")
 source("R/utils-targets.R")
 
@@ -74,7 +74,7 @@ scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_scenarios(
-    est, param, init, control, scenarios.list,
+    est = est, param = param, init, control, scenarios.list,
     output_dir = "data/output/calib",
     libraries = "EpiModelHIV",
     n_rep = 50,
