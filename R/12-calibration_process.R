@@ -18,7 +18,7 @@ calib_dir <- "data/output/calib"
 # Process each file in parallel ------------------------------------------------
 calib_files <- list.files(
   calib_dir,
-  pattern = "^simcalib_.*rds$",
+  pattern = "^sim__.*rds$",
   full.names = TRUE
 )
 

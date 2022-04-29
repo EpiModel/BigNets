@@ -74,6 +74,3 @@ concurent_el <- el_cuml_df %>%
 nrow(concurent_el)
 print(concurent_el, n = 2000)
 
-
-
-
