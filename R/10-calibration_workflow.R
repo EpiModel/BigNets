@@ -55,6 +55,7 @@ wf <- add_workflow_step(
 #     "mem" = "0" # special: all mem on node
 #   )
 # )
+source("R/utils-netsize.R")
 source("R/utils-netsim_inputs.R")
 source("R/utils-targets.R")
 
