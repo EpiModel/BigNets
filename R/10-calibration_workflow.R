@@ -27,34 +27,6 @@ wf <- add_workflow_step(
 )
 
 # # Run the simulations ----------------------------------------------------------
-# n_batches <- 10
-# scenarios.df <- read.csv("data/input/calib_scenarios.csv")
-# scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
-# scenarios.list <- rep(scenarios.list, n_batches)
-#
-# # for this template, the syntax is similar to `base::Map` and `mapply`
-# # in this case, each instance will have a different value of
-# # - scenario, scenario_name and batch_num
-# # but they all share the same value for `ncores`
-#
-# wf <- add_workflow_step(
-#   wf_summary = wf,
-#   step_tmpl = step_tmpl_map_script(
-#     r_script = "R/11-calibration_sim.R",
-#     scenario = scenarios.list,
-#     batch_num = seq_along(scenarios.list),
-#     MoreArgs = list(
-#       ncores = max_cores
-#     ),
-#     max_array_size = 999,
-#     setup_lines = hpc_configs$r_loader
-#   ),
-#   sbatch_opts = list(
-#     "cpus-per-task" = max_cores,
-#     "time" = "24:00:00",
-#     "mem" = "0" # special: all mem on node
-#   )
-# )
 source("R/utils-netsize.R")
 source("R/utils-netsim_inputs.R")
 source("R/utils-targets.R")
@@ -74,7 +46,8 @@ scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_scenarios(
-    est = est, param = param, init, control, scenarios.list,
+    est = est, param = param, init = init, control = control,
+    scenarios_list = NULL,
     output_dir = "data/output/calib",
     libraries = "EpiModelHIV",
     n_rep = 50,
