@@ -74,3 +74,19 @@ concurent_el <- el_cuml_df %>%
 nrow(concurent_el)
 print(concurent_el, n = 2000)
 
+
+# shared edges over time in the same network
+el_cuml_df %>%
+  ungroup() %>%
+  group_by(network, head, tail) %>%
+  summarize(n = n()) %>%
+  ungroup() %>%
+  group_by(network) %>%
+  summarize(repeated = sum(n > 1))
+
+# repeated edges on the one-of network
+el_cuml_df %>%
+  filter(network == 3, stop - start > 0) %>%
+  mutate(duration = stop - start + 1) %>%
+  print(n = 200)
+
