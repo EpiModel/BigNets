@@ -16,7 +16,7 @@ control <- control_msm(
   nsims = 1,
   ncores = 1,
   cumulative.edgelist = TRUE,
-  truncate.el.cuml = Inf,
+  truncate.el.cuml = 0,
   verbose = TRUE,
   tracker.list = calibration_trackers
 )

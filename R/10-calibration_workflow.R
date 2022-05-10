@@ -46,7 +46,7 @@ scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_scenarios(
-    est = est, param = param, init = init, control = control,
+    est, param, init, control,
     scenarios_list = scenarios.list,
     output_dir = "data/output/calib",
     libraries = "EpiModelHIV",

@@ -1,7 +1,6 @@
 ##
 ## utils. Default Inputs for EpiModel::nestim
 ##
-##
 
 # Required variables: (provided by the calling script)
 # - NETSIZE
