@@ -1,3 +1,11 @@
+# # Setup
+# pkgs <- paste0(
+#   "statnet/",
+#   c("statnet.common", "network", "networkDynamic", "ergm", "tergm"),
+#   "@master"
+# )
+# renv::install(pkgs)
+
 callr::r(
   function() {
     ncores <- 1
@@ -15,5 +23,3 @@ callr::r(
   },
   show = TRUE
 )
-
-
