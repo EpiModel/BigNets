@@ -41,7 +41,7 @@ dx_main <- netdx(
   nsteps = nsteps,
   nwstats.formula = model_main_dx,
   skip.dissolution = TRUE,
-  set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5),
+  set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5),
   set.control.tergm = control.simulate.formula.tergm(MCMC.burnin.min = 2e5)
 )
 
@@ -51,7 +51,7 @@ dx_main_static <- EpiModel::netdx(
   nsims = 10000,
   nwstats.formula = model_main_dx,
   skip.dissolution = TRUE,
-  set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5)
+  set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5)
 )
 
 dx <- list(dx_main = dx_main, dx_main_static = dx_main_static)
@@ -81,7 +81,7 @@ dx_casl <- netdx(
   nsteps = nsteps,
   nwstats.formula = model_casl_dx,
   skip.dissolution = TRUE,
-  set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5),
+  set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5),
   set.control.tergm = control.simulate.formula.tergm(MCMC.burnin.min = 2e5)
 )
 
@@ -91,7 +91,7 @@ dx_casl_static <- netdx(
   nsims = 10000,
   nwstats.formula = model_casl_dx,
   skip.dissolution = TRUE,
-  set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5)
+  set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5)
 )
 
 dx <- list(dx_casl = dx_casl, dx_casl_static = dx_casl_static)
@@ -118,7 +118,7 @@ dx_inst <- netdx(
   nsims = 10000,
   dynamic = FALSE,
   nwstats.formula = model_inst_dx,
-  set.control.ergm = control.simulate.ergm(MCMC.burnin = 1e5)
+  set.control.ergm = control.simulate.formula(MCMC.burnin = 1e5)
 )
 
 dx <- list(dx_inst = dx_inst)
