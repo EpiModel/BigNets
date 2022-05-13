@@ -5,6 +5,10 @@
 # Required variables:
 #   - `ncores`
 #   - `nsteps`
+if (interactive()) {
+  ncores <- 2
+  nsteps <- 52
+}
 
 # Setup ------------------------------------------------------------------------
 suppressMessages({

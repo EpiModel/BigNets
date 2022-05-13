@@ -6,6 +6,11 @@
 #   - ncores
 #   - nsims
 #   - nsteps
+if (interactive()) {
+  ncores <- 2
+  nsims <- 10
+  nsteps <- 500
+}
 
 # Setup ------------------------------------------------------------------------
 suppressMessages({

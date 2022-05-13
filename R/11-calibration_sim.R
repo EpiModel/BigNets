@@ -6,6 +6,11 @@
 #   - `scenario`
 #   - `batch_num`
 #   - `ncores`
+if (interactive()) {
+  scenario <- NULL
+  batch_num <- 1
+  ncores <- 2
+}
 
 # Setup ------------------------------------------------------------------------
 suppressMessages({
