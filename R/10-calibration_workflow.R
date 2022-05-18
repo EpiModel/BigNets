@@ -7,7 +7,10 @@ library("slurmworkflow")
 library("EpiModelHPC")
 
 # hpc_configs <- swf_configs_hyak(hpc = "mox", partition = "csde")
-hpc_configs <- swf_configs_rsph(partition = "preemptable")
+hpc_configs <- swf_configs_rsph(
+  partition = "preemptable",
+  mail_user = "user@emory.edu"
+)
 max_cores <- 28
 
 # Workflow creation ------------------------------------------------------------

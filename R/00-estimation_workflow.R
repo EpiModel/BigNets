@@ -8,8 +8,11 @@ library("EpiModelHPC")
 # The size of network to be used is defined in "R/utils-netsize.R"
 
 # hpc_configs <- swf_configs_hyak(hpc = "mox", partition = "csde")
-hpc_configs <- swf_configs_rsph(partition = "epimodel")
-max_cores <- 32
+hpc_configs <- swf_configs_rsph(
+  partition = "epimodel",
+  mail_user = "user@emory.edu"
+)
+max_cores <- 10
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
@@ -41,7 +44,7 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_do_call_script(
     r_script = "R/01-estimation.R",
     args = list(
-      ncores = 10
+      ncores = max_cores
    ),
     setup_lines = hpc_configs$r_loader
   ),
@@ -58,7 +61,7 @@ wf <- add_workflow_step(
   step_tmpl = step_tmpl_do_call_script(
     r_script = "R/02-diagnostics.R",
     args = list(
-      ncores = 10,
+      ncores = max_cores,
       nsims = 50,
       nsteps = 500
     ),
