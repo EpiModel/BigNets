@@ -9,7 +9,7 @@ library("EpiModelHPC")
 # hpc_configs <- swf_configs_hyak(hpc = "mox", partition = "csde")
 hpc_configs <- swf_configs_rsph(
   partition = "preemptable",
-  mail_user = "user@emory.edu"
+  mail_user = "aleguil@emory.edu"
 )
 max_cores <- 28
 
@@ -40,7 +40,10 @@ control <- control_msm(
   cumulative.edgelist = TRUE,
   truncate.el.cuml = 0,
   verbose = FALSE,
-  tracker.list = calibration_trackers # created in R/utils-targets.R
+  tracker.list = calibration_trackers, # created in R/utils-targets.R
+  .checkpoint.dir = "data/cp_tmp",
+  .checkpoint.steps = 100,
+  .checkpoint.keep = TRUE
 )
 
 scenarios.df <- read.csv("data/input/calib_scenarios.csv")

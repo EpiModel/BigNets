@@ -12,13 +12,16 @@ source("R/utils-netsim_inputs.R")
 source("R/utils-targets.R")
 
 control <- control_msm(
-  nsteps = 10 * 52,
-  nsims = 1,
+  nsteps = 1 * 52,
+  nsims = 2,
   ncores = 1,
   cumulative.edgelist = TRUE,
   truncate.el.cuml = 0,
   verbose = TRUE,
-  tracker.list = calibration_trackers
+  tracker.list = calibration_trackers,
+  .checkpoint.dir = "/root/cp",
+  .checkpoint.steps = 15,
+  .checkpoint.keep = FALSE
 )
 
 n_batches <- 10
