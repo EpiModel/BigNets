@@ -9,7 +9,7 @@ library("EpiModelHPC")
 # hpc_configs <- swf_configs_hyak(hpc = "mox", partition = "csde")
 hpc_configs <- swf_configs_rsph(
   partition = "preemptable",
-  mail_user = "user@emory.edu"
+  mail_user = "aleguil@emory.edu"
 )
 max_cores <- 28
 
@@ -23,7 +23,7 @@ wf <- create_workflow(
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_renv_restore(
-    git_branch = "main",
+    git_branch = "re_calibration",
     setup_lines = hpc_configs$r_loader
   ),
   sbatch_opts = hpc_configs$renv_sbatch_opts
@@ -43,6 +43,8 @@ control <- control_msm(
   tracker.list = calibration_trackers # created in R/utils-targets.R
 )
 
+# insert test values here
+
 scenarios.df <- read.csv("data/input/calib_scenarios.csv")
 scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
 
@@ -50,10 +52,10 @@ wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_scenarios(
     est, param, init, control,
-    scenarios_list = scenarios.list,
+    scenarios_list = NULL, # scenarios.list,
     output_dir = "data/output/calib",
     libraries = "EpiModelHIV",
-    n_rep = 50,
+    n_rep = 280,
     n_cores = max_cores,
     max_array_size = 999,
     setup_lines = hpc_configs$r_loader
