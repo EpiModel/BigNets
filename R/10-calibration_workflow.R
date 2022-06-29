@@ -62,7 +62,7 @@ wf <- add_workflow_step(
   ),
   sbatch_opts = list(
     "cpus-per-task" = max_cores,
-    "time" = "01:00:00",
+    "time" = "05:00:00",
     "mem" = "0" # special: all mem on node
   )
 )
@@ -83,7 +83,7 @@ wf <- add_workflow_step(
     "cpus-per-task" = max_cores,
     "time" = "04:00:00",
     "mem-per-cpu" = "4G",
-    "mail-type" = "END"
+    "mail-type" = "END,TIME_LIMIT"
   )
 )
 # to send the workflows on the HPC
