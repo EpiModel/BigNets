@@ -11,7 +11,8 @@ hpc_configs <- swf_configs_rsph(
   partition = "preemptable",
   mail_user = "aleguil@emory.edu"
 )
-max_cores <- 28
+
+max_cores <- 10
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
@@ -40,7 +41,9 @@ control <- control_msm(
   cumulative.edgelist = TRUE,
   truncate.el.cuml = 0,
   verbose = FALSE,
-  tracker.list = calibration_trackers # created in R/utils-targets.R
+  tracker.list = calibration_trackers, # created in R/utils-targets.R,
+  .checkpoint.dir = "data/cp_recal",
+  .checkpoint.steps = 52
 )
 
 # insert test values here
@@ -62,7 +65,7 @@ wf <- add_workflow_step(
   ),
   sbatch_opts = list(
     "cpus-per-task" = max_cores,
-    "time" = "05:00:00",
+    "time" = "10:00:00",
     "mem" = "0" # special: all mem on node
   )
 )
