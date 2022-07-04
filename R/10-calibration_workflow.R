@@ -35,6 +35,8 @@ source("R/utils-netsize.R")
 source("R/utils-netsim_inputs.R")
 source("R/utils-targets.R")
 
+cp_dir <- "data/cp_recal"
+
 control <- control_msm(
   nsteps = calibration_length,
   nsims = 1, ncores = 1,
@@ -43,6 +45,7 @@ control <- control_msm(
   verbose = FALSE,
   tracker.list = calibration_trackers, # created in R/utils-targets.R,
   .checkpoint.dir = "data/cp_recal",
+  .checkpoint.clear = FALSE,
   .checkpoint.steps = 52
 )
 
@@ -64,6 +67,7 @@ wf <- add_workflow_step(
     setup_lines = hpc_configs$r_loader
   ),
   sbatch_opts = list(
+    "mail-type" = "FAIL,TIME_LIMIT",
     "cpus-per-task" = max_cores,
     "time" = "10:00:00",
     "mem" = "0" # special: all mem on node
@@ -78,7 +82,8 @@ wf <- add_workflow_step(
     r_script = "R/12-calibration_process.R",
     args = list(
       ncores = 15,
-      nsteps = 52
+      nsteps = 52,
+      cp_dir = cp_dir
     ),
     setup_lines = hpc_configs$r_loader
   ),
@@ -86,7 +91,7 @@ wf <- add_workflow_step(
     "cpus-per-task" = max_cores,
     "time" = "04:00:00",
     "mem-per-cpu" = "4G",
-    "mail-type" = "END,TIME_LIMIT"
+    "mail-type" = "TIME_LIMIT"
   )
 )
 # to send the workflows on the HPC

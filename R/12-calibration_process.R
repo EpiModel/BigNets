@@ -5,9 +5,11 @@
 # Required variables:
 #   - `ncores`
 #   - `nsteps`
+#
 if (interactive()) {
   ncores <- 2
   nsteps <- 52
+  cp_dir <- ""
 }
 
 # Setup ------------------------------------------------------------------------
@@ -15,6 +17,8 @@ suppressMessages({
   library("EpiModelHIV")
   library("future.apply")
 })
+
+if (fs::dir_exists(cp_dir)) fs::dir_delete(cp_dir)
 
 future::plan(future::multicore, workers = ncores)
 calib_dir <- "data/output/calib"
