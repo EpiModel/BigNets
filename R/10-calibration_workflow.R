@@ -12,7 +12,7 @@ hpc_configs <- swf_configs_rsph(
   mail_user = "aleguil@emory.edu"
 )
 
-max_cores <- 10
+max_cores <- 28
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
@@ -44,7 +44,7 @@ control <- control_msm(
   truncate.el.cuml = 0,
   verbose = FALSE,
   tracker.list = calibration_trackers, # created in R/utils-targets.R,
-  .checkpoint.dir = "data/cp_recal",
+  .checkpoint.dir = cp_dir,
   .checkpoint.clear = FALSE,
   .checkpoint.steps = 52
 )
@@ -69,7 +69,7 @@ wf <- add_workflow_step(
   sbatch_opts = list(
     "mail-type" = "FAIL,TIME_LIMIT",
     "cpus-per-task" = max_cores,
-    "time" = "10:00:00",
+    "time" = "04:00:00",
     "mem" = "0" # special: all mem on node
   )
 )

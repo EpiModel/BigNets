@@ -13,12 +13,15 @@ source("R/utils-targets.R")
 
 control <- control_msm(
   nsteps = 10 * 52,
-  nsims = 1,
-  ncores = 1,
+  nsims = 1, ncores = 1,
   cumulative.edgelist = TRUE,
   truncate.el.cuml = 0,
-  verbose = TRUE,
-  tracker.list = calibration_trackers
+  verbose = FALSE,
+  tracker.list = calibration_trackers,
+  .checkpoint.dir = "data/cp_recal",
+  .checkpoint.clear = FALSE,
+  .checkpoint.steps = 52,
+  raw.output = TRUE
 )
 
 n_batches <- 10
@@ -31,6 +34,43 @@ scenarios.list <- rep(scenarios.list, n_batches)
 
 # Simulation -------------------------------------------------------------------
 sim <- netsim(est, param, init, control)
+
+options(browser = "firefox")
+dat <- sim[[1]]
+dat$control$nsteps <- dat$control$nsteps + 1
+at <- dat$control$nsteps
+profvis::profvis({
+  n = 0
+  while (n < 100) {
+    dat <- sim[[1]]
+    # dat$control$nsteps <- dat$control$nsteps + 1
+    at <- dat$control$nsteps
+
+    dat <- aging_msm(dat, at)
+    dat <- departure_msm(dat, at)
+    dat <- arrival_msm(dat, at)
+    dat <- partident_msm(dat, at)
+    dat <- hivtest_msm(dat, at)
+    dat <- hivtx_msm(dat, at)
+    dat <- hivprogress_msm(dat, at)
+    dat <- hivvl_msm(dat, at)
+    # dat <- simnet_msm(dat, at)
+    dat <- acts_msm(dat, at)
+    dat <- condoms_msm(dat, at)
+    dat <- position_msm(dat, at)
+    dat <- prep_msm(dat, at)
+    dat <- hivtrans_msm(dat, at)
+    dat <- stitrans_msm(dat, at)
+    dat <- stirecov_msm(dat, at)
+    dat <- stitx_msm(dat, at)
+    dat <- prevalence_msm(dat, at)
+    dat <- trackers.net(dat, at)
+    dat <- verbose.net(dat, at)
+
+    n = n + 1
+  }
+})
+
 sim$param
 
 # Exploration ------------------------------------------------------------------

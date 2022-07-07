@@ -23,3 +23,8 @@ of big numbers in scientific format in strings).
 
 Setting `NETSIZE` with this script will avoid discrepancies in network sizes
 between the different scripts of the project.
+
+| | min | lq | mean | median | uq | max | neval |
+|-|-|-|-|-|-|-|-|
+| BigNets | 185.1 | 192.9 | 196.1 | 195.5 | 197.2 | 214.4  |  100 |
+| SexualDistancing | 31.3 | 36.8 | 41.5 | 39.3 | 41.5 | 195.2 | 100 |

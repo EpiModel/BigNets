@@ -5,8 +5,9 @@
 
 # Setup ------------------------------------------------------------------------
 suppressMessages({
-  library("EpiModel")
-  library("dplyr")
+  library(EpiModel)
+  library(dplyr)
+  library(tidyr)
 })
 
 d <- readRDS("data/output/calib/assessments_100k.rds")
