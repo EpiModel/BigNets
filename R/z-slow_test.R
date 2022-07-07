@@ -239,7 +239,6 @@ control <- control_msm(nsteps = 10 * 52, nsims = 1, ncores = 1, verbose = FALSE)
 dat <- initialize_msm(est, param, init, control, s = 1)
 dat2 <- dat
 
-options(browser = "firefox")
 nwparam <- EpiModel::get_nwparam(dat, network = 1)
 nwL <- networkLite(dat[["el"]][[1]], dat[["attr"]])
 dat <- set_attr(dat, "deg.casl", EpiModel::get_degree(dat$el[[2]]))
@@ -259,5 +258,3 @@ microbenchmark::microbenchmark( {
       dynamic = TRUE
     )
   })
-
-
