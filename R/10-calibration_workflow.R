@@ -46,7 +46,7 @@ control <- control_msm(
   tracker.list = calibration_trackers, # created in R/utils-targets.R,
   .checkpoint.dir = cp_dir,
   .checkpoint.clear = FALSE,
-  .checkpoint.steps = 52
+  .checkpoint.steps = 0
 )
 
 # insert test values here
@@ -91,7 +91,7 @@ wf <- add_workflow_step(
     "cpus-per-task" = max_cores,
     "time" = "04:00:00",
     "mem-per-cpu" = "4G",
-    "mail-type" = "TIME_LIMIT"
+    "mail-type" = "END"
   )
 )
 # to send the workflows on the HPC
