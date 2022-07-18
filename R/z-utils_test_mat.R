@@ -146,3 +146,38 @@ condoms_msm_new <- function(dat, at) {
 
   return(dat)
 }
+
+position_msm_new <- function(dat, at) {
+  al <- dat[["temp"]][["al"]]
+  if (nrow(al) == 0) {
+    return(dat)
+  }
+
+  # Attributes
+  role.class <- get_attr(dat, "role.class")
+  ins.quot   <- get_attr(dat, "ins.quot")
+
+  # Parameters
+
+  ## Process
+  p1.role.class <- role.class[al[["p1"]]]
+  p2.role.class <- role.class[al[["p2"]]]
+
+  # if p1 is insertive or receptive, sets the oposite for the line
+  # if p1 is versatile, use the role class of p2
+  # when the result is 2, it means that p1 and p2 are versatile (2)
+  ins <- ifelse(p1.role.class == 2, p2.role.class, -p1.role.class + 1)
+  versatile.dyad <- which(ins == 2)
+
+  # Versatile MSM
+  ins.quot.p1 <- ins.quot[al[["p1"]][versatile.dyad]]
+  ins.quot.p2 <- ins.quot[al[["p2"]][versatile.dyad]]
+  p1.ins.prob <- ins.quot.p1 / (ins.quot.p1 + ins.quot.p2)
+
+  ins[versatile.dyad] <- runif(length(versatile.dyad)) < p1.ins.prob
+
+  ## Output
+  dat[["temp"]][["al"]] <- dplyr::bind_cols(al, ins = ins)
+
+  return(dat)
+}

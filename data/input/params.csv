@@ -56,9 +56,6 @@ a.rate,0.00049,numeric
 arrival.age,15,numeric
 hiv.urai.prob,0.008938,numeric
 hiv.uiai.prob,0.003379,numeric
-hiv.trans.scale_1,1,numeric
-hiv.trans.scale_2,1,numeric
-hiv.trans.scale_3,1,numeric
 hiv.acute.rr,6,numeric
 hiv.circ.rr,0.4,numeric
 hiv.cond.eff.rr,0.95,numeric
