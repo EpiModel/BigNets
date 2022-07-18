@@ -21,10 +21,9 @@ control <- control_msm(
   .checkpoint.dir = "data/cp_recal",
   .checkpoint.clear = TRUE,
   .checkpoint.steps = 0,
-  raw.output = TRUE
+  raw.output = FALSE
 )
 
-control$save.other <- c("attr", "temp", "el") # remove `p` from save.other
 
 n_batches <- 10
 scenarios.df <- read.csv("data/input/calib_scenarios.csv")
@@ -36,13 +35,12 @@ scenarios.list <- rep(scenarios.list, n_batches)
 
 # Simulation -------------------------------------------------------------------
 sim <- netsim(est, param, init, control)
-process_out.net(sim)
 
-dat <- sim[[1]]
-out <- list()
+dat_list <- fs::dir_ls("data/cp_recal/cp_recal/batch_1")
+dat_list <- lapply(dat_list, readRDS)
 
+sim <- process_out.net(dat_list)
 
-dat_list <- sim
 for (s in seq_along(dat_list)) {
   print(s)
   # Set output
@@ -52,6 +50,9 @@ for (s in seq_along(dat_list)) {
     out <- saveout.net(dat_list[[s]], s, out)
   }
 }
+
+s = 18
+dat <- dat_list[[s]]
 
 saveout.net <- function(dat, s, out = NULL) {
 
@@ -111,7 +112,6 @@ saveout.net <- function(dat, s, out = NULL) {
     if (!is.null(dat$control$save.other)) {
       for (i in seq_along(dat$control$save.other)) {
         el.name <- dat$control$save.other[i]
-        print(el.name)
         out[[el.name]] <- list(dat[[el.name]])
       }
     }
@@ -276,100 +276,3 @@ saveout.net <- function(dat, s, out = NULL) {
 
   return(out)
 }
-
-
-options(browser = "firefox")
-dat <- sim[[1]]
-dat$control$nsteps <- dat$control$nsteps + 1
-at <- dat$control$nsteps
-profvis::profvis({
-  n = 0
-  while (n < 100) {
-    dat <- sim[[1]]
-    # dat$control$nsteps <- dat$control$nsteps + 1
-    at <- dat$control$nsteps
-
-    dat <- aging_msm(dat, at)
-    dat <- departure_msm(dat, at)
-    dat <- arrival_msm(dat, at)
-    dat <- partident_msm(dat, at)
-    dat <- hivtest_msm(dat, at)
-    dat <- hivtx_msm(dat, at)
-    dat <- hivprogress_msm(dat, at)
-    dat <- hivvl_msm(dat, at)
-    # dat <- simnet_msm(dat, at)
-    dat <- acts_msm(dat, at)
-    dat <- condoms_msm(dat, at)
-    dat <- position_msm(dat, at)
-    dat <- prep_msm(dat, at)
-    dat <- hivtrans_msm(dat, at)
-    dat <- stitrans_msm(dat, at)
-    dat <- stirecov_msm(dat, at)
-    dat <- stitx_msm(dat, at)
-    dat <- prevalence_msm(dat, at)
-    dat <- trackers.net(dat, at)
-    dat <- verbose.net(dat, at)
-
-    n = n + 1
-  }
-})
-
-sim$param
-
-# Exploration ------------------------------------------------------------------
-d_sim <- as.data.frame(sim)
-d_sim <- mutate_targets(d_sim)
-
-# Test calibration functions ---------------------------------------------------
-file_name <- "data/output/simtest__test__10.rds"
-saveRDS(sim, file_name)
-rm(sim, d_sim)
-gc()
-d_p <- process_one_calibration(file_name, nsteps = 10)
-glimpse(d_p)
-
-# el_cuml ----------------------------------------------------------------------
-
-el_cuml_list <- sim$el.cuml$sim1
-el_cuml_df <- dplyr::bind_rows(el_cuml_list)
-el_sizes <- vapply(el_cuml_list, nrow, numeric(1))
-el_cuml_df[["network"]] <- rep(1:3, el_sizes)
-
-el_cuml_df %>%
-  group_by(network) %>%
-  summarise(n = n())
-
-concurent_el <- el_cuml_df %>%
-  group_by(head, tail) %>%
-  summarize(n = n()) %>%
-  ungroup() %>%
-  filter(n > 1) %>%
-  left_join(el_cuml_df, by = c("head", "tail")) %>%
-  mutate(stop = if_else(is.na(stop), Inf, stop)) %>%
-  arrange(head, tail, start, stop) %>%
-  group_by(head, tail) %>%
-  mutate(
-    concurent = start < lag(stop),
-    concurent = if_else(is.na(concurent), lead(concurent), concurent)
-  ) %>%
-  filter(concurent)
-
-nrow(concurent_el)
-print(concurent_el, n = 2000)
-
-
-# shared edges over time in the same network
-el_cuml_df %>%
-  ungroup() %>%
-  group_by(network, head, tail) %>%
-  summarize(n = n()) %>%
-  ungroup() %>%
-  group_by(network) %>%
-  summarize(repeated = sum(n > 1))
-
-# repeated edges on the one-of network
-el_cuml_df %>%
-  filter(network == 3, stop - start > 0) %>%
-  mutate(duration = stop - start + 1) %>%
-  print(n = 200)
-
