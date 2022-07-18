@@ -46,7 +46,7 @@ control <- control_msm(
   tracker.list = calibration_trackers, # created in R/utils-targets.R,
   .checkpoint.dir = cp_dir,
   .checkpoint.clear = FALSE,
-  .checkpoint.steps = 0
+  .checkpoint.steps = 30 * 52
 )
 
 # insert test values here
