@@ -9,27 +9,20 @@
 source("R/utils-netsize.R")
 source("R/utils-netsim_inputs.R")
 source("R/utils-targets.R")
-# renv::install("../EpiModel.git/dev")
+# renv::install("../EpiModelHIV-p")
 
-ncores <- 4
-
-library(future.apply)
-plan(multisession, workers = ncores)
+ncores <- 1
 
 control <- control_msm(
   nsteps = 1 * 52,
-  nsims = 1, ncores = 1,
+  nsims = ncores, ncores = ncores,
   cumulative.edgelist = TRUE,
   truncate.el.cuml = 0,
   verbose = FALSE,
   tracker.list = calibration_trackers,
+  save.nwstats = TRUE,
   raw.output = FALSE
 )
-
-
-gc()
-Sys.sleep(5)
-print("start_sim")
 
 
 # n_batches <- 10
@@ -40,15 +33,7 @@ print("start_sim")
 # param <- use_scenario(param, scenarios.list[[4]])
 
 # Simulation -------------------------------------------------------------------
+sim <- netsim(est, param, init, control)
 
-# start_t <- Sys.time()
-# sim <- netsim(est, param, init, control)
-# print(Sys.time() - start_t)
+sim$stats$nwstats
 
-dat_list <- future_lapply(
-  1:ncores,
-  function(x) netsim(est, param, init, control),
-  future.seed = TRUE
-)
-
-rm(dat_list); gc()

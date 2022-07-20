@@ -52,17 +52,23 @@ control <- control_msm(
 
 # insert test values here
 
-scenarios.df <- read.csv("data/input/calib_scenarios.csv")
+scenarios.df <- tibble(
+  .scenario.id = c("0-base"),
+  .at = 1,
+  hiv.trans.scale_1	= c(3.4),
+  hiv.trans.scale_2	= c(0.53),
+  hiv.trans.scale_3	= c(0.33)
+)
 scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
 
 wf <- add_workflow_step(
   wf_summary = wf,
   step_tmpl = step_tmpl_netsim_scenarios(
     est, param, init, control,
-    scenarios_list = NULL, # scenarios.list,
+    scenarios_list = scenarios.list,
     output_dir = "data/output/calib",
     libraries = "EpiModelHIV",
-    n_rep = 200,
+    n_rep = 600,
     n_cores = max_cores,
     max_array_size = 999,
     setup_lines = hpc_configs$r_loader
