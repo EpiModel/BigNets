@@ -9,7 +9,7 @@
 if (interactive()) {
   scenario <- NULL
   batch_num <- 1
-  ncores <- 2
+  ncores <- 4
 }
 
 # Setup ------------------------------------------------------------------------
@@ -37,6 +37,7 @@ control <- control_msm(
   cumulative.edgelist = TRUE,
   truncate.el.cuml = 0,
   verbose = TRUE,
+  raw.output = TRUE,
   tracker.list = calibration_trackers # created in R/utils-targets.R
 )
 

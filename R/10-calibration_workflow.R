@@ -42,11 +42,12 @@ control <- control_msm(
   nsims = 1, ncores = 1,
   cumulative.edgelist = TRUE,
   truncate.el.cuml = 0,
-  verbose = FALSE,
   tracker.list = calibration_trackers, # created in R/utils-targets.R,
-  .checkpoint.dir = cp_dir,
-  .checkpoint.clear = FALSE,
-  .checkpoint.steps = 30 * 52
+  # .checkpoint.dir = cp_dir,
+  # .checkpoint.clear = FALSE,
+  # .checkpoint.steps = 30 * 52,
+  verbose = FALSE,
+  raw.output = FALSE
 )
 
 # insert test values here
@@ -61,7 +62,7 @@ wf <- add_workflow_step(
     scenarios_list = NULL, # scenarios.list,
     output_dir = "data/output/calib",
     libraries = "EpiModelHIV",
-    n_rep = 280,
+    n_rep = 200,
     n_cores = max_cores,
     max_array_size = 999,
     setup_lines = hpc_configs$r_loader
