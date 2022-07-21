@@ -12,7 +12,7 @@ hpc_configs <- swf_configs_rsph(
   mail_user = "aleguil@emory.edu"
 )
 
-max_cores <- 10
+max_cores <- 28
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
@@ -68,7 +68,7 @@ wf <- add_workflow_step(
     scenarios_list = scenarios.list,
     output_dir = "data/output/calib",
     libraries = "EpiModelHIV",
-    n_rep = 200,
+    n_rep = 580,
     n_cores = max_cores,
     max_array_size = 999,
     setup_lines = hpc_configs$r_loader
