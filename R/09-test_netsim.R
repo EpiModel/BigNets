@@ -11,16 +11,16 @@ source("R/utils-netsim_inputs.R")
 source("R/utils-targets.R")
 # renv::install("../EpiModelHIV-p")
 
-ncores <- 1
+ncores <- 3
 
 control <- control_msm(
-  nsteps = 1 * 52,
+  nsteps = 2 * 52,
   nsims = ncores, ncores = ncores,
   cumulative.edgelist = TRUE,
   truncate.el.cuml = 0,
   verbose = FALSE,
   tracker.list = calibration_trackers,
-  save.nwstats = TRUE,
+  save.nwstats = FALSE,
   raw.output = FALSE
 )
 
@@ -33,7 +33,7 @@ control <- control_msm(
 # param <- use_scenario(param, scenarios.list[[4]])
 
 # Simulation -------------------------------------------------------------------
+start <- Sys.time()
 sim <- netsim(est, param, init, control)
 
-sim$stats$nwstats
-
+print(Sys.time() - start)

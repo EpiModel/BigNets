@@ -23,7 +23,9 @@ interv_start       <- prep_start + 52 * 5
 nsteps             <- interv_start + 52 * 10 - 1
 
 # Parameters -------------------------------------------------------------------
-df_params <- readr::read_csv("data/input/params.csv", )
+csv_params <- paste0("data/input/params-", netsize_string, ".csv")
+df_params <- readr::read_csv(csv_params)
+
 param <- param.net(
   data.frame.params = df_params,
   netstats = netstats,
