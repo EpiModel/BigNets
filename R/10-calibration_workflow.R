@@ -12,7 +12,7 @@ hpc_configs <- swf_configs_rsph(
   mail_user = "aleguil@emory.edu"
 )
 
-max_cores <- 20
+max_cores <- 32
 
 # Workflow creation ------------------------------------------------------------
 wf <- create_workflow(
@@ -53,11 +53,11 @@ control <- control_msm(
 # insert test values here
 
 scenarios.df <- tibble(
-  .scenario.id = c("0-base"),
+  .scenario.id = c("0", "1", "2", "3"),
   .at = 1,
-  hiv.trans.scale_1	= c(4),
-  hiv.trans.scale_2	= c(.6),
-  hiv.trans.scale_3	= c(.4),
+  hiv.trans.scale_1	= c(4, 4, 4, 4),
+  hiv.trans.scale_2	= c(.53, .57, .53, .57),
+  hiv.trans.scale_3	= c(.33, .33, .37, .37)
 )
 scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
 
@@ -68,7 +68,7 @@ wf <- add_workflow_step(
     scenarios_list = scenarios.list,
     output_dir = "data/output/calib",
     libraries = "EpiModelHIV",
-    n_rep = 400,
+    n_rep = 384,
     n_cores = max_cores,
     max_array_size = 999,
     setup_lines = hpc_configs$r_loader
