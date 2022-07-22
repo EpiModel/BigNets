@@ -39,6 +39,7 @@ assessments <- future.apply::future_lapply(
 
 # Merge all and combine --------------------------------------------------------
 assessments <- bind_rows(assessments)
+saveRDS(assessments, paste0(calib_dir, "/assessments_persim.rds"))
 
 assessments <- assessments %>%
   select(- c(sim, batch)) %>%

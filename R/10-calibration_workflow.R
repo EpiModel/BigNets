@@ -53,11 +53,13 @@ control <- control_msm(
 # insert test values here
 
 scenarios.df <- tibble(
-  .scenario.id = c("0", "1", "2", "3"),
-  .at = 1,
-  hiv.trans.scale_1	= c(4, 4.1, 4.2, 4.3),
-  hiv.trans.scale_2	= c(.53, .53, .53, .53),
-  hiv.trans.scale_3	= c(.33, .32, .32, .32)
+  .scenario.id = "choose_restart",
+  .at = 1
+  # .scenario.id = c("0", "1", "2", "3"),
+  # .at = 1,
+  # hiv.trans.scale_1	= c(4, 4.1, 4.2, 4.3),
+  # hiv.trans.scale_2	= c(.53, .53, .53, .53),
+  # hiv.trans.scale_3	= c(.33, .32, .32, .32)
 )
 scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
 
@@ -68,7 +70,7 @@ wf <- add_workflow_step(
     scenarios_list = scenarios.list,
     output_dir = "data/output/calib",
     libraries = "EpiModelHIV",
-    n_rep = 384,
+    n_rep = 1600,
     n_cores = max_cores,
     max_array_size = 999,
     setup_lines = hpc_configs$r_loader
