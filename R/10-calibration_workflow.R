@@ -55,9 +55,9 @@ control <- control_msm(
 scenarios.df <- tibble(
   .scenario.id = c("0", "1", "2", "3"),
   .at = 1,
-  hiv.trans.scale_1	= c(4, 4, 4, 4),
-  hiv.trans.scale_2	= c(.53, .57, .53, .57),
-  hiv.trans.scale_3	= c(.33, .33, .37, .37)
+  hiv.trans.scale_1	= c(4, 4.1, 4.2, 4.),
+  hiv.trans.scale_2	= c(.53, .53, .53, .53),
+  hiv.trans.scale_3	= c(.33, .32, .32, 32)
 )
 scenarios.list <- EpiModel::create_scenario_list(scenarios.df)
 
